@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -7,7 +7,7 @@
 }
 
 .btn {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-brand.primary text-black font-semibold hover:opacity-90 transition shadow-glow;
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-md bg-brand-primary text-black font-semibold hover:opacity-90 transition shadow-glow;
 }
 
 .card {
