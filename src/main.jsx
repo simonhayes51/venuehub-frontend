@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -55,6 +56,8 @@ function App(){
 
 createRoot(document.getElementById("root")).render(<App/>);
 =======
+=======
+>>>>>>> 7804ac6a0cd6cc0fd332fa53a21aeff1567414d0
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.jsx'; import Acts from './pages/Acts.jsx'; import ActDetail from './pages/ActDetail.jsx';
@@ -71,5 +74,9 @@ const router = createBrowserRouter([
   { path:'/shortlist', element:<Shortlist/> },
   { path:'/admin', element:<Admin/> },
 ]);
+<<<<<<< HEAD
 createRoot(document.getElementById('root')).render(<RouterProvider router={router}/>);
 >>>>>>> 9e975c2 (UI overhaul: Tailwind, hero, cards, filters, join wizard, shortlist, admin shell; VITE_API_BASE wired)
+=======
+createRoot(document.getElementById('root')).render(<RouterProvider router={router}/>);
+>>>>>>> 7804ac6a0cd6cc0fd332fa53a21aeff1567414d0

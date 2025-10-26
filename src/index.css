@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -68,6 +69,8 @@ button:focus-visible {
   }
 }
 =======
+=======
+>>>>>>> 7804ac6a0cd6cc0fd332fa53a21aeff1567414d0
 @tailwind base; @tailwind components; @tailwind utilities;
 html,body,#root{height:100%} body{background:#0c0f17;color:#fff}
 .container-2xl{max-width:1200px;margin:0 auto;padding:0 1rem}
@@ -75,5 +78,9 @@ html,body,#root{height:100%} body{background:#0c0f17;color:#fff}
 .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:12px;padding:.6rem 1rem}
 .btn-primary{background:#9b5cff;color:#fff}
 .btn-ghost{border:1px solid #ffffff2a;background:#ffffff0f}
+<<<<<<< HEAD
 .pill{border:1px solid #ffffff2a;background:#ffffff12;padding:.15rem .6rem;border-radius:999px;font-size:.75rem}
 >>>>>>> 9e975c2 (UI overhaul: Tailwind, hero, cards, filters, join wizard, shortlist, admin shell; VITE_API_BASE wired)
+=======
+.pill{border:1px solid #ffffff2a;background:#ffffff12;padding:.15rem .6rem;border-radius:999px;font-size:.75rem}
+>>>>>>> 7804ac6a0cd6cc0fd332fa53a21aeff1567414d0
