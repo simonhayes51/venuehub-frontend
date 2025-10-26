@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import Card from "../components/Card.jsx";
-import Loading from "../components/Loading.jsx";
+import { useEffect, useMemo, useState } from "react";
+import { FaFilter, FaSort } from "react-icons/fa6";
+import CardVenue from "../components/CardVenue.jsx";
+import LoadingGrid from "../components/LoadingGrid.jsx";
 import ErrorPanel from "../components/ErrorPanel.jsx";
 
 const API = import.meta.env.VITE_API_BASE || "";
@@ -8,6 +9,8 @@ const API = import.meta.env.VITE_API_BASE || "";
 export default function Venues(){
   const [items,setItems] = useState(null);
   const [err,setErr] = useState(null);
+  const [q,setQ] = useState("");
+  const [sort,setSort] = useState("name");
 
   useEffect(()=>{
     fetch(`${API}/venues`)
@@ -15,28 +18,45 @@ export default function Venues(){
       .then(setItems).catch(setErr);
   },[]);
 
+  const filtered = useMemo(()=>{
+    if(!Array.isArray(items)) return items;
+    const s = q.trim().toLowerCase();
+    let list = s ? items.filter(v => (v?.name??"").toLowerCase().includes(s) || (v?.location??"").toLowerCase().includes(s)) : items.slice();
+    switch(sort){
+      case "capacity": list.sort((a,b)=> (b?.capacity??0)-(a?.capacity??0)); break;
+      case "price": list.sort((a,b)=> (a?.price_from??999999)-(b?.price_from??999999)); break;
+      default: list.sort((a,b)=> String(a?.name??"").localeCompare(String(b?.name??""))); 
+    }
+    return list;
+  }, [items,q,sort]);
+
   return (
-    <main className="container-h py-10 space-y-6">
-      <div className="flex items-end justify-between">
+    <main className="container-h py-10 space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <p className="eyebrow">Browse</p>
           <h2 className="text-2xl font-semibold">Featured Venues</h2>
         </div>
+        <div className="flex items-center gap-2">
+          <div className="pill">
+            <FaFilter className="opacity-70"/>
+            <input className="bg-transparent outline-none placeholder:text-white/40" placeholder="Search by name, city…" value={q} onChange={e=>setQ(e.target.value)}/>
+          </div>
+          <div className="pill">
+            <FaSort className="opacity-70"/>
+            <select className="bg-transparent outline-none" value={sort} onChange={e=>setSort(e.target.value)}>
+              <option value="name">Name</option>
+              <option value="capacity">Capacity</option>
+              <option value="price">Price (from)</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      {!items && !err && <Loading/>}
+      {!items && !err && <LoadingGrid/>}
       {err && <ErrorPanel error={err}/>}
-      {Array.isArray(items) &&
-        <div className="grid-cards">
-          {items.map(v=>(
-            <Card key={v.id}
-              image={v.image_url}
-              title={v.name ?? "Untitled Venue"}
-              subtitle={v.location}
-              meta={v.capacity ? `Capacity ${v.capacity} • from £${v.price_from ?? 0}` : (v.price_from ? `from £${v.price_from}` : null)}
-            />
-          ))}
-        </div>
+      {Array.isArray(filtered) &&
+        <div className="grid-cards">{filtered.map(v => <CardVenue key={v.id??crypto.randomUUID()} venue={v}/>)}</div>
       }
     </main>
   );
