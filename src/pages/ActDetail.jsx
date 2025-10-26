@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Rating from '../components/Rating'
+import ReviewList from '../components/ReviewList'
+import ShortlistButton from '../components/ShortlistButton'
 import { useParams } from 'react-router-dom'
-import api from '../api'
+import { useEffect, useState } from 'react'
 
-export default function ActDetail() {
+const API = import.meta.env.VITE_API_BASE
+
+export default function ActDetail(){
   const { id } = useParams()
-  const [act, setAct] = useState(null)
-  const [form, setForm] = useState({ customer_name: '', customer_email: '', date: '', message: '' })
+  const [act,setAct] = useState(null)
+  const [reviews,setReviews] = useState([])
 
-  useEffect(() => {
-    api.get(`/api/acts/${id}`).then(res => setAct(res.data))
-  }, [id])
+  useEffect(()=>{
+    fetch(`${API}/acts/${id}`).then(r=>r.json()).then(setAct).catch(()=>{})
+    fetch(`${API}/api/reviews?act_id=${id}`).then(r=>r.json()).then(setReviews).catch(()=>{})
+  },[id])
 
-  const submit = async (e) => {
-    e.preventDefault()
-    await api.post('/api/bookings', { ...form, act_id: Number(id) })
-    alert('Enquiry sent!')
-    setForm({ customer_name: '', customer_email: '', date: '', message: '' })
-  }
-
-  if (!act) return <main className="max-w-4xl mx-auto px-4 py-10">Loading...</main>
+  if(!act) return (<div><Navbar/><div className="container-2xl section">Loading…</div></div>)
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-10 space-y-6">
-      <h2 className="text-3xl font-black">{act.name}</h2>
-      <p className="text-white/70">{act.description || 'A fantastic act for your event.'}</p>
-      <div className="flex gap-4 text-white/80">
-        <span className="px-3 py-1 rounded bg-white/10">{act.act_type}</span>
-        <span className="px-3 py-1 rounded bg-white/10">{act.location}</span>
-        {act.rating && <span className="px-3 py-1 rounded bg-white/10">⭐ {act.rating}</span>}
+    <div>
+      <Navbar/>
+      <div className="container-2xl section grid md:grid-cols-12 gap-6">
+        <div className="md:col-span-7 card overflow-hidden">
+          <img src={act.image_url} alt={act.name} className="w-full object-cover"/>
+        </div>
+        <div className="md:col-span-5">
+          <h1 className="font-display text-3xl">{act.name}</h1>
+          <div className="mt-2 flex items-center gap-3">
+            <span className="pill">{act.act_type}</span>
+            <span className="text-white/70 text-sm">{act.location}</span>
+            <Rating value={act.rating||0}/>
+          </div>
+          {act.price_from && <div className="mt-3 text-white/80">from £{Math.round(act.price_from)}</div>}
+          <p className="mt-4 text-white/80">{act.description}</p>
+          <div className="mt-5 flex items-center gap-3">
+            <a href={`/enquire/act/${act.id}`} className="btn-primary">Enquire</a>
+            <ShortlistButton id={act.id} type="act" />
+          </div>
+          <div className="mt-8">
+            <h2 className="font-display text-xl mb-2">Reviews</h2>
+            <ReviewList items={reviews}/>
+          </div>
+        </div>
       </div>
-
-      <form onSubmit={submit} className="card space-y-3">
-        <h3 className="font-bold text-xl">Send an Enquiry</h3>
-        <input className="w-full px-3 py-2 rounded bg-white/5 border border-white/10" placeholder="Your name"
-          value={form.customer_name} onChange={e => setForm({ ...form, customer_name: e.target.value })} required />
-        <input className="w-full px-3 py-2 rounded bg-white/5 border border-white/10" placeholder="Your email"
-          value={form.customer_email} onChange={e => setForm({ ...form, customer_email: e.target.value })} required />
-        <input className="w-full px-3 py-2 rounded bg-white/5 border border-white/10" placeholder="Event date (YYYY-MM-DD)"
-          value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} required />
-        <textarea className="w-full px-3 py-2 rounded bg-white/5 border border-white/10" placeholder="Message"
-          value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
-        <button className="btn w-full">Send</button>
-      </form>
-    </main>
+      <Footer/>
+    </div>
   )
 }
