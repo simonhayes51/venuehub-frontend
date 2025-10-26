@@ -1,6 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './pages/App'
-import './styles.css'
-ReactDOM.createRoot(document.getElementById('root')).render(<BrowserRouter><App/></BrowserRouter>)
+﻿import { createRoot } from "react-dom/client";
+function App(){ return <div style={{padding:20,color:"#fff",background:"#111",minHeight:"100vh"}}>VenueHub</div>; }
+createRoot(document.getElementById("root")).render(<App />);
