@@ -1,23 +1,17 @@
-<<<<<<< HEAD
-=======
-/** @type {import('tailwindcss').Config} */
->>>>>>> c62559c4a343a38bf8b0ad21830b253dc5cca718
+import plugin from 'tailwindcss/plugin';
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./index.html','./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      fontFamily: { display: ['Poppins','ui-sans-serif','system-ui'], sans: ['Inter','ui-sans-serif','system-ui'] },
-      colors: { brand: { bg:"#0c0f17", card:"#121728", primary:"#9b5cff", secondary:"#00e7f0", accent:"#ff4d6d", ring:"#7c3aed" } },
-      boxShadow: { neon:"0 0 0 2px rgba(155,92,255,0.35), 0 0 30px rgba(0,231,240,0.2)", card:"0 10px 30px rgba(0,0,0,0.25)" },
-      animation: { 'pulse-slow': 'pulse 3s ease-in-out infinite' },
-<<<<<<< HEAD
+      colors: {
+        bg: '#0c0f17',
+        card: '#121728',
+        brand: { primary:'#9b5cff', secondary:'#00e7f0', accent:'#ff4d6d' }
+      },
+      boxShadow: { soft:'0 10px 30px rgba(0,0,0,.25)' }
     }
   },
-  plugins: [],
-};
-=======
-    },
-  },
-  plugins: [],
-};
->>>>>>> c62559c4a343a38bf8b0ad21830b253dc5cca718
+  plugins: [plugin(function({ addUtilities }) {
+    addUtilities({ '.glass':'background:rgba(255,255,255,.06);backdrop-filter:saturate(120%) blur(8px)' })
+  })]
+}

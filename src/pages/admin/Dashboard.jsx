@@ -1,26 +1,12 @@
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
-import { useEffect, useState } from 'react'
-const API = import.meta.env.VITE_API_BASE
-
-export default function AdminDashboard(){
-  const [acts,setActs] = useState([])
-  const [venues,setVenues] = useState([])
-  const [bookings,setBookings] = useState([])
-  useEffect(()=>{
-    fetch(`${API}/api/admin/acts`).then(r=>r.json()).then(setActs).catch(()=>{})
-    fetch(`${API}/api/admin/venues`).then(r=>r.json()).then(setVenues).catch(()=>{})
-    fetch(`${API}/api/admin/bookings`).then(r=>r.json()).then(setBookings).catch(()=>{})
-  },[])
-  return (
-    <div>
-      <Navbar/>
-      <div className="container-2xl section grid md:grid-cols-3 gap-4">
-        <div className="card p-4"><div className="text-sm text-muted">Acts</div><div className="text-3xl font-display">{acts.length}</div></div>
-        <div className="card p-4"><div className="text-sm text-muted">Venues</div><div className="text-3xl font-display">{venues.length}</div></div>
-        <div className="card p-4"><div className="text-sm text-muted">Bookings</div><div className="text-3xl font-display">{bookings.length}</div></div>
-      </div>
-      <Footer/>
+import Navbar from '../../components/Navbar'; import Footer from '../../components/Footer';
+export default function Admin(){
+  return(<div><Navbar/><div className='container-2xl py-8'>
+    <h1 className='text-3xl mb-4'>Admin</h1>
+    <div className='grid md:grid-cols-3 gap-4'>
+      <a className='card p-4 block' href='/admin/acts'>Manage Acts</a>
+      <a className='card p-4 block' href='/admin/venues'>Manage Venues</a>
+      <a className='card p-4 block' href='/admin/reviews'>Moderate Reviews</a>
     </div>
-  )
+    <p className='text-white/70 mt-6 text-sm'>Stub UI. We can wire authenticated endpoints as soon as you’re ready.</p>
+  </div><Footer/></div>);
 }

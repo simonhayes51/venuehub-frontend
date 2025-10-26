@@ -1,3 +1,17 @@
-﻿import { createRoot } from "react-dom/client";
-function App(){ return <div style={{padding:20,color:"#fff",background:"#111",minHeight:"100vh"}}>VenueHub</div>; }
-createRoot(document.getElementById("root")).render(<App />);
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home.jsx'; import Acts from './pages/Acts.jsx'; import ActDetail from './pages/ActDetail.jsx';
+import Venues from './pages/Venues.jsx'; import VenueDetail from './pages/VenueDetail.jsx';
+import Join from './pages/Join.jsx'; import Shortlist from './pages/Shortlist.jsx'; import Admin from './pages/admin/Dashboard.jsx';
+import './index.css';
+const router = createBrowserRouter([
+  { path:'/', element:<Home/> },
+  { path:'/acts', element:<Acts/> },
+  { path:'/acts/:id', element:<ActDetail/> },
+  { path:'/venues', element:<Venues/> },
+  { path:'/venues/:id', element:<VenueDetail/> },
+  { path:'/join', element:<Join/> },
+  { path:'/shortlist', element:<Shortlist/> },
+  { path:'/admin', element:<Admin/> },
+]);
+createRoot(document.getElementById('root')).render(<RouterProvider router={router}/>);

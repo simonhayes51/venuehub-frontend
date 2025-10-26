@@ -1,50 +1,20 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import ReviewList from '../components/ReviewList'
-import ShortlistButton from '../components/ShortlistButton'
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-
-const API = import.meta.env.VITE_API_BASE
-
+import Navbar from '../components/Navbar'; import Footer from '../components/Footer';
+import { api } from '../lib/api'; import { useEffect, useState } from 'react'; import { useParams } from 'react-router-dom';
 export default function VenueDetail(){
-  const { id } = useParams()
-  const [venue,setVenue] = useState(null)
-  const [reviews,setReviews] = useState([])
-
-  useEffect(()=>{
-    fetch(`${API}/venues/${id}`).then(r=>r.json()).then(setVenue).catch(()=>{})
-    fetch(`${API}/api/reviews?venue_id=${id}`).then(r=>r.json()).then(setReviews).catch(()=>{})
-  },[id])
-
-  if(!venue) return (<div><Navbar/><div className="container-2xl section">Loading…</div></div>)
-
-  return (
-    <div>
-      <Navbar/>
-      <div className="container-2xl section grid md:grid-cols-12 gap-6">
-        <div className="md:col-span-7 card overflow-hidden">
-          <img src={venue.image_url} alt={venue.name} className="w-full object-cover"/>
-        </div>
-        <div className="md:col-span-5">
-          <h1 className="font-display text-3xl">{venue.name}</h1>
-          <div className="mt-2 flex items-center gap-3">
-            <span className="pill">{venue.style||'Venue'}</span>
-            <span className="text-white/70 text-sm">{venue.location}</span>
-          </div>
-          {venue.price_from && <div className="mt-3 text-white/80">from £{Math.round(venue.price_from)}</div>}
-          <p className="mt-4 text-white/80">{venue.amenities}</p>
-          <div className="mt-5 flex items-center gap-3">
-            <a href={`/enquire/venue/${venue.id}`} className="btn-primary">Enquire</a>
-            <ShortlistButton id={venue.id} type="venue" />
-          </div>
-          <div className="mt-8">
-            <h2 className="font-display text-xl mb-2">Reviews</h2>
-            <ReviewList items={reviews}/>
-          </div>
-        </div>
+  const { id }=useParams(); const [v,setV]=useState(null); const [reviews,setReviews]=useState([]);
+  useEffect(()=>{ api.get('/venues/'+id).then(r=>setV(r.data)); api.get('/reviews?venue_id='+id).then(r=>setReviews(r.data)).catch(()=>{}) },[id]);
+  if(!v) return <div><Navbar/><div className='container-2xl py-10'>Loading…</div></div>;
+  return(<div><Navbar/><div className='container-2xl py-8 grid md:grid-cols-12 gap-6'>
+    <div className='md:col-span-7 card overflow-hidden'><img src={v.image_url} alt={v.name}/></div>
+    <div className='md:col-span-5'>
+      <h1 className='text-3xl font-display'>{v.name}</h1>
+      <div className='mt-2 flex items-center gap-3'><span className='pill'>{v.style||'Venue'}</span><span className='text-white/70 text-sm'>{v.location}</span></div>
+      <div className='mt-3 text-white/80'>{v.price_from?rom £:''}</div>
+      <p className='mt-4 text-white/80'>{v.amenities}</p>
+      <div className='mt-5 flex items-center gap-3'><a className='btn btn-primary' href={'/enquire/venue/'+v.id}>Enquire</a><a className='btn btn-ghost' href='/shortlist'>Save</a></div>
+      <div className='mt-8'><h2 className='text-xl mb-2'>Reviews</h2>
+        {reviews.length? <div className='space-y-3'>{reviews.map((r,i)=><div key={i} className='card p-3'><div className='text-amber-300'>{'★'.repeat(r.rating||0)}</div><div className='text-white/80 mt-1'>{r.comment}</div></div>)}</div> : <div className='text-white/70'>No reviews yet.</div>}
       </div>
-      <Footer/>
     </div>
-  )
+  </div><Footer/></div>);
 }
