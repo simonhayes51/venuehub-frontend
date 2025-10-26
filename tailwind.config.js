@@ -5,9 +5,9 @@ export default {
       colors: {
         bg: "#0c0f17",
         card: "#121728",
-        brand: { primary:"#9b5cff", secondary:"#00e7f0", accent:"#ff4d6d" }
+        brand: { primary:"#22d3a6", secondary:"#60a5fa", accent:"#f472b6" }
       },
-      boxShadow: { soft:"0 10px 30px rgba(0,0,0,.25)" }
+      boxShadow: { soft:"0 12px 30px rgba(0,0,0,.25)" }
     }
   },
   plugins: []
