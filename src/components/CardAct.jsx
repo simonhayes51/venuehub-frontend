@@ -1,7 +1,11 @@
 import RatingStars from "./RatingStars.jsx";
+import { useShortlist } from "../context/ShortlistContext.jsx";
+
 export default function CardAct({act}){
+  const {add} = useShortlist();
+  const onSave = ()=> add("acts", act);
   return (
-    <article className="card overflow-hidden hover:shadow-glow transition">
+    <article className="card overflow-hidden spotlight">
       {act?.image_url ? <img src={act.image_url} alt="" className="h-44 w-full object-cover"/> : <div className="h-44 bg-white/5"/>}
       <div className="p-4 space-y-2">
         <div className="flex items-start justify-between gap-3">
@@ -9,7 +13,10 @@ export default function CardAct({act}){
           {act?.rating ? <RatingStars rating={act.rating}/> : null}
         </div>
         <p className="text-sm text-white/70">{act?.genre || act?.location || "—"}</p>
-        <p className="text-xs text-white/50">{act?.price_from ? `From £${act.price_from}` : "Price on request"}</p>
+        <div className="flex items-center justify-between text-xs text-white/60">
+          <span>{act?.price_from ? `From £${act.price_from}` : "Price on request"}</span>
+          <button onClick={onSave} className="pill">Save</button>
+        </div>
       </div>
     </article>
   );
