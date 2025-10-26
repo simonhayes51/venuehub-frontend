@@ -1,8 +1,11 @@
 import { useShortlist } from "../context/ShortlistContext.jsx";
+import { useCompare } from "../context/CompareContext.jsx";
+import { Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
 export default function ShortlistDrawer(){
   const {open,toggleOpen,items,remove,clear} = useShortlist();
+  const {pick} = useCompare();
   const has = (items.acts?.length||0) + (items.venues?.length||0) > 0;
 
   return (
@@ -24,7 +27,11 @@ export default function ShortlistDrawer(){
                     <img src={x.image_url ?? ""} alt="" className="w-14 h-14 object-cover rounded-xl bg-white/5"/>
                     <div className="flex-1">
                       <div className="font-medium leading-tight">{x.name}</div>
-                      <div className="text-xs text-white/60">{x.location || x.genre || "—"}</div>
+                      <div className="text-xs text-white/50">{x.location || x.genre || "—"}</div>
+                      <div className="mt-2 flex gap-2">
+                        <Link to={`/${type.slice(0,-1)}/${x.id}`} className="pill">Details</Link>
+                        <button className="pill" onClick={()=>pick(type, x)}>Compare</button>
+                      </div>
                     </div>
                     <button className="pill" onClick={()=>remove(type, x.id)}>Remove</button>
                   </div>

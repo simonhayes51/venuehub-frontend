@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaFilter, FaSort } from "react-icons/fa6";
 import CardAct from "../components/CardAct.jsx";
 import LoadingGrid from "../components/LoadingGrid.jsx";
@@ -11,11 +11,21 @@ export default function Acts(){
   const [err,setErr] = useState(null);
   const [q,setQ] = useState("");
   const [sort,setSort] = useState("name");
+  const [limit,setLimit] = useState(12);
+  const sentinel = useRef(null);
 
   useEffect(()=>{
     fetch(`${API}/acts`)
       .then(r => r.ok ? r.json() : Promise.reject(new Error(r.status+" "+r.statusText)))
       .then(setItems).catch(setErr);
+  },[]);
+
+  useEffect(()=>{
+    const el = sentinel.current; if(!el) return;
+    const io = new IntersectionObserver(([e])=>{
+      if(e.isIntersecting) setLimit(v=>v+12);
+    }, {rootMargin:"600px"});
+    io.observe(el); return ()=>io.disconnect();
   },[]);
 
   const filtered = useMemo(()=>{
@@ -56,7 +66,10 @@ export default function Acts(){
       {!items && !err && <LoadingGrid/>}
       {err && <ErrorPanel error={err}/>}
       {Array.isArray(filtered) &&
-        <div className="grid-cards">{filtered.map(a => <CardAct key={a.id??crypto.randomUUID()} act={a}/>)}</div>
+        <>
+          <div className="grid-cards">{filtered.slice(0, limit).map(a => <CardAct key={a.id??crypto.randomUUID()} act={a}/>)}</div>
+          <div ref={sentinel} />
+        </>
       }
     </main>
   );
