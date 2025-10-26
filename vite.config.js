@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -11,3 +12,8 @@ export default defineConfig({
     }),
   ],
 })
+=======
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+export default defineConfig({ plugins:[react()], build:{ outDir:'dist' } });
+>>>>>>> 9e975c2 (UI overhaul: Tailwind, hero, cards, filters, join wizard, shortlist, admin shell; VITE_API_BASE wired)
