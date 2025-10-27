@@ -1,19 +1,56 @@
-﻿export default function Search(){
+﻿import { useEffect, useState } from "react";
+import SEO from "../components/SEO.jsx";
+import api from "../lib/api.js";
+import CardAct from "../components/CardAct.jsx";
+import CardVenue from "../components/CardVenue.jsx";
+
+export default function Search(){
+  const [q,setQ] = useState("");
+  const [type,setType] = useState("all");
+  const [results,setResults] = useState(null);
+  const [err,setErr] = useState(null);
+
+  async function run(){
+    setErr(null); setResults(null);
+    try{
+      const data = await api.search(q,type);
+      setResults(data);
+    }catch(e){ setErr(e); }
+  }
+
+  useEffect(()=>{ run(); },[]);
+
   return (
-    <main className="container-h py-10">
-      <h1 className="text-3xl font-semibold mb-4">Search (Map)</h1>
-      <div className="grid lg:grid-cols-[320px_1fr] gap-4 min-h-[50vh]">
-        <aside className="card p-4 space-y-3">
-          <div className="font-semibold">Filters</div>
-          <input className="input" placeholder="City / region…" />
-          <select className="input"><option>Acts</option><option>Venues</option></select>
-          <input className="input" placeholder="Budget / Capacity" />
-          <button className="btn">Apply</button>
-        </aside>
-        <section className="card p-4 flex items-center justify-center text-white/60">
-          Map coming soon — integrate Leaflet/Mapbox.
-        </section>
+    <main className="container-h py-8 space-y-4">
+      <SEO title="Search" description="Filter acts & venues and compare." />
+      <div className="card p-4 grid gap-3 md:grid-cols-[1fr_200px_120px_auto]">
+        <input className="input" placeholder="Search acts & venues..." value={q} onChange={e=>setQ(e.target.value)} />
+        <select className="input" value={type} onChange={e=>setType(e.target.value)}>
+          <option value="all">All</option><option value="acts">Acts</option><option value="venues">Venues</option>
+        </select>
+        <button className="btn" onClick={run}>Search</button>
       </div>
+
+      {!results && !err && <div className="skeleton h-24" />}
+      {err && <div className="text-rose-300">Couldn’t search right now.</div>}
+
+      {results && (
+        <div className="grid gap-10">
+          {(results.acts?.length>0) && (
+            <section>
+              <div className="text-sm uppercase tracking-widest text-white/50 mb-3">Acts</div>
+              <div className="grid-cards">{results.acts.map(a => <CardAct key={`a-${a.id}`} act={a}/>)}</div>
+            </section>
+          )}
+          {(results.venues?.length>0) && (
+            <section>
+              <div className="text-sm uppercase tracking-widest text-white/50 mb-3">Venues</div>
+              <div className="grid-cards">{results.venues.map(v => <CardVenue key={`v-${v.id}`} venue={v}/>)}</div>
+            </section>
+          )}
+          {(results.acts?.length??0) + (results.venues?.length??0) === 0 && <div className="text-white/60">No results yet.</div>}
+        </div>
+      )}
     </main>
   );
 }
