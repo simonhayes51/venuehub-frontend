@@ -1,56 +1,58 @@
 ﻿import { useEffect, useState } from "react";
-import SEO from "../components/SEO.jsx";
-import api from "../lib/api.js";
-import CardAct from "../components/CardAct.jsx";
-import CardVenue from "../components/CardVenue.jsx";
+import { getJSON } from "../lib/api";
 
 export default function Search(){
-  const [q,setQ] = useState("");
-  const [type,setType] = useState("all");
-  const [results,setResults] = useState(null);
-  const [err,setErr] = useState(null);
+  const [tab, setTab] = useState("acts");
+  const [acts, setActs] = useState([]);
+  const [venues, setVenues] = useState([]);
+  const [q, setQ] = useState("");
 
-  async function run(){
-    setErr(null); setResults(null);
-    try{
-      const data = await api.search(q,type);
-      setResults(data);
-    }catch(e){ setErr(e); }
-  }
+  useEffect(()=>{
+    getJSON("/acts").then(setActs).catch(()=>setActs([]));
+    getJSON("/venues").then(setVenues).catch(()=>setVenues([]));
+  },[]);
 
-  useEffect(()=>{ run(); },[]);
+  const filteredActs = acts.filter(a => (a.name||"").toLowerCase().includes(q.toLowerCase()));
+  const filteredVenues = venues.filter(v => (v.name||"").toLowerCase().includes(q.toLowerCase()));
 
   return (
-    <main className="container-h py-8 space-y-4">
-      <SEO title="Search" description="Filter acts & venues and compare." />
-      <div className="card p-4 grid gap-3 md:grid-cols-[1fr_200px_120px_auto]">
-        <input className="input" placeholder="Search acts & venues..." value={q} onChange={e=>setQ(e.target.value)} />
-        <select className="input" value={type} onChange={e=>setType(e.target.value)}>
-          <option value="all">All</option><option value="acts">Acts</option><option value="venues">Venues</option>
-        </select>
-        <button className="btn" onClick={run}>Search</button>
+    <div className="container mx-auto px-6 py-10">
+      <div className="flex items-center gap-3 mb-6">
+        <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search acts & venues"
+               className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 w-full outline-none"/>
+        <div className="flex gap-2">
+          <button onClick={()=>setTab("acts")} className={`px-4 py-2 rounded-xl ${tab==="acts"?"bg-emerald-500 text-black":"bg-white/5"}`}>Acts</button>
+          <button onClick={()=>setTab("venues")} className={`px-4 py-2 rounded-xl ${tab==="venues"?"bg-emerald-500 text-black":"bg-white/5"}`}>Venues</button>
+        </div>
       </div>
 
-      {!results && !err && <div className="skeleton h-24" />}
-      {err && <div className="text-rose-300">Couldn’t search right now.</div>}
-
-      {results && (
-        <div className="grid gap-10">
-          {(results.acts?.length>0) && (
-            <section>
-              <div className="text-sm uppercase tracking-widest text-white/50 mb-3">Acts</div>
-              <div className="grid-cards">{results.acts.map(a => <CardAct key={`a-${a.id}`} act={a}/>)}</div>
-            </section>
-          )}
-          {(results.venues?.length>0) && (
-            <section>
-              <div className="text-sm uppercase tracking-widest text-white/50 mb-3">Venues</div>
-              <div className="grid-cards">{results.venues.map(v => <CardVenue key={`v-${v.id}`} venue={v}/>)}</div>
-            </section>
-          )}
-          {(results.acts?.length??0) + (results.venues?.length??0) === 0 && <div className="text-white/60">No results yet.</div>}
+      {tab==="acts" ? (
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {filteredActs.map(a=>(
+            <div key={a.id} className="bg-white/5 border border-white/10 rounded-2xl p-5">
+              <div className="text-lg font-semibold">{a.name}</div>
+              <div className="text-sm opacity-70">{a.location || "—"}</div>
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-sm opacity-70">From £{a.price_from ?? "—"}</span>
+                <a href={`/acts/${a.id}`} className="text-emerald-400">View</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {filteredVenues.map(v=>(
+            <div key={v.id} className="bg-white/5 border border-white/10 rounded-2xl p-5">
+              <div className="text-lg font-semibold">{v.name}</div>
+              <div className="text-sm opacity-70">{v.location || "—"}</div>
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-sm opacity-70">From £{v.price_from ?? "—"}</span>
+                <a href={`/venues/${v.id}`} className="text-emerald-400">View</a>
+              </div>
+            </div>
+          ))}
         </div>
       )}
-    </main>
+    </div>
   );
 }
