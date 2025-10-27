@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+﻿import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { ShortlistProvider } from "./context/ShortlistContext.jsx";
@@ -14,6 +14,9 @@ import Join from "./pages/Join.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import ActDetail from "./pages/ActDetail.jsx";
 import VenueDetail from "./pages/VenueDetail.jsx";
+import Search from "./pages/Search.jsx";
+import Onboard from "./pages/Onboard.jsx";
+import Leads from "./pages/Leads.jsx";
 
 function Shell(){
   return (
@@ -27,6 +30,9 @@ function Shell(){
         <Route path="/venues/:id" element={<VenueDetail/>}/>
         <Route path="/join" element={<Join/>}/>
         <Route path="/pricing" element={<Pricing/>}/>
+              <Route path="/search" element={<Search/>}/>
+        <Route path="/onboard" element={<Onboard/>}/>
+        <Route path="/admin/leads" element={<Leads/>}/>
       </Routes>
       <Footer/>
       <ShortlistDrawer/>
