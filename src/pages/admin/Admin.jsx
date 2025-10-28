@@ -1,4 +1,4 @@
-﻿import SubmissionsPanel from '../components/admin/SubmissionsPanel.jsx';
+﻿import SubmissionsPanel from '../../../components/admin/SubmissionsPanel.jsx';
 // src/pages/admin/Admin.jsx
 import { useEffect, useMemo, useState } from "react";
 
@@ -183,4 +183,5 @@ export default function Admin() {
       </tr>
     );
   }
+
 
