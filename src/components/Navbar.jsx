@@ -1,48 +1,37 @@
 ﻿import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(){
   const [open, setOpen] = useState(false);
-  const item = "px-3 py-2 rounded-lg hover:bg-white/10 transition-colors";
-  const active = "bg-white/10";
-
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-black/40 border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl">🎤</span>
-          <span className="font-bold tracking-wide">VenueHub</span>
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-1">
-          <NavLink to="/" end className={({isActive}) => `${item} ${isActive ? active : ""}`}>Home</NavLink>
-          <NavLink to="/acts" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Acts</NavLink>
-          <NavLink to="/venues" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Venues</NavLink>
-          <NavLink to="/search" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Search</NavLink>
-          <NavLink to="/join" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Add My Services</NavLink>
-          <NavLink to="/pricing" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Pricing</NavLink>
+    <header className="sticky top-0 z-40 bg-[#0b0f13]/85 backdrop-blur border-b border-white/10">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-2">
+          <img src="/logo.svg" alt="" onError={(e)=>{e.target.style.display="none"}} className="w-6 h-6"/>
+          <span className="font-semibold">VenueHub</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-6 text-sm">
+          <a href="/acts">Acts</a>
+          <a href="/venues">Venues</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/search">Search</a>
+          <a href="/admin/leads">Admin</a>
+          <a href="/join" className="ml-2 rounded-xl px-3 py-1 bg-emerald-500 text-black font-medium hover:bg-emerald-600">
+            Add My Services
+          </a>
+          <a href="/shortlist" className="rounded-xl px-3 py-1 bg-white/10 border border-white/10">Shortlist</a>
         </nav>
-
-        <button
-          className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10"
-          onClick={() => setOpen(v => !v)}
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </button>
+        <button onClick={()=>setOpen(!open)} className="md:hidden rounded-lg px-2 py-1 border border-white/10">Menu</button>
       </div>
-
       {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/70">
-          <div className="max-w-6xl mx-auto px-4 py-3 grid gap-2">
-            <NavLink to="/" end onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Home</NavLink>
-            <NavLink to="/acts" onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Acts</NavLink>
-            <NavLink to="/venues" onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Venues</NavLink>
-            <NavLink to="/search" onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Search</NavLink>
-            <NavLink to="/join" onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Add My Services</NavLink>
-            <NavLink to="/pricing" onClick={()=>setOpen(false)} className={({isActive}) => `${item} ${isActive ? active : ""}`}>Pricing</NavLink>
+        <div className="md:hidden border-t border-white/10">
+          <div className="px-4 py-3 flex flex-col gap-2 text-sm">
+            <a href="/acts">Acts</a>
+            <a href="/venues">Venues</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/search">Search</a>
+            <a href="/admin/leads">Admin</a>
+            <a href="/join">Add My Services</a>
+            <a href="/shortlist">Shortlist</a>
           </div>
         </div>
       )}
