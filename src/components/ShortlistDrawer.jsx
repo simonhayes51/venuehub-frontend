@@ -1,5 +1,5 @@
-﻿import { useShortlist } from ".../context/ShortlistContext.jsx";
-import { useCompare } from ".../context/CompareContext.jsx";
+﻿import { useShortlist } from "../context/ShortlistContext.jsx";
+import { useCompare } from "../context/CompareContext.jsx";
 import { Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
