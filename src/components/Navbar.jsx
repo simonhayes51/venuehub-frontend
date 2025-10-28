@@ -1,11 +1,8 @@
-﻿$nav = Join-Path (Get-Location) 'src\components\Navbar.jsx'
-@'
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
   const item = "px-3 py-2 rounded-lg hover:bg-white/10 transition-colors";
   const active = "bg-white/10";
 
@@ -17,7 +14,6 @@ export default function Navbar() {
           <span className="font-bold tracking-wide">VenueHub</span>
         </Link>
 
-        {/* desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           <NavLink to="/" end className={({isActive}) => `${item} ${isActive ? active : ""}`}>Home</NavLink>
           <NavLink to="/acts" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Acts</NavLink>
@@ -27,7 +23,6 @@ export default function Navbar() {
           <NavLink to="/pricing" className={({isActive}) => `${item} ${isActive ? active : ""}`}>Pricing</NavLink>
         </nav>
 
-        {/* mobile button */}
         <button
           className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/10"
           onClick={() => setOpen(v => !v)}
@@ -39,7 +34,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* mobile sheet */}
       {open && (
         <div className="md:hidden border-t border-white/10 bg-black/70">
           <div className="max-w-6xl mx-auto px-4 py-3 grid gap-2">
@@ -55,4 +49,3 @@ export default function Navbar() {
     </header>
   );
 }
-'@ | Set-Content -Encoding utf8 $nav
