@@ -1,7 +1,7 @@
 ﻿import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ShortlistProvider } from "./context/ShortlistContext.jsx";
-import { CompareProvider } from "./context/CompareContext.jsx";
+import { ShortlistProvider } from "../context/ShortlistContext.jsx";
+import { CompareProvider } from "../context/CompareContext.jsx";
 import ShortlistDrawer from "./components/ShortlistDrawer.jsx";
 import CompareModal from "./components/CompareModal.jsx";
 import Navbar from "./components/Navbar.jsx";
