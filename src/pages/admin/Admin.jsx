@@ -1,4 +1,5 @@
-﻿// src/pages/admin/Admin.jsx
+﻿import SubmissionsPanel from '../components/admin/SubmissionsPanel.jsx';
+// src/pages/admin/Admin.jsx
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE?.replace(/\/+$/,"") || "";
@@ -182,3 +183,4 @@ export default function Admin() {
       </tr>
     );
   }
+
