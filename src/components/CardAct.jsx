@@ -1,7 +1,7 @@
-import RatingStars from "./RatingStars.jsx";
-import { useShortlist } from "../context/ShortlistContext.jsx";
+﻿import RatingStars from "./RatingStars.jsx";
+import { useShortlist } from ".../context/ShortlistContext.jsx";
 import { Link } from "react-router-dom";
-import { useCompare } from "../context/CompareContext.jsx";
+import { useCompare } from ".../context/CompareContext.jsx";
 
 export default function CardAct({act}){
   const {add} = useShortlist();
@@ -16,9 +16,9 @@ export default function CardAct({act}){
           <Link to={`/acts/${act?.id ?? ""}`} className="font-semibold leading-tight">{act?.name ?? "Untitled Act"}</Link>
           {act?.rating ? <RatingStars rating={act.rating}/> : null}
         </div>
-        <p className="text-sm text-white/70">{act?.genre || act?.location || "—"}</p>
+        <p className="text-sm text-white/70">{act?.genre || act?.location || "â€”"}</p>
         <div className="flex items-center justify-between text-xs text-white/60">
-          <span>{act?.price_from ? `From £${act.price_from}` : "Price on request"}</span>
+          <span>{act?.price_from ? `From Â£${act.price_from}` : "Price on request"}</span>
           <div className="flex gap-2">
             <button onClick={()=>add("acts", act)} className="pill">Save</button>
             <button onClick={()=>pick("acts", act)} className="pill">Compare</button>
