@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Gallery from "../components/Gallery.jsx";
 import Reviews from "../components/Reviews.jsx";
 import EnquiryForm from "../components/EnquiryForm.jsx";
-import { useShortlist } from ".../context/ShortlistContext.jsx";
+import { useShortlist } from "../context/ShortlistContext.jsx";
 
 const API = import.meta.env.VITE_API_BASE || "";
 

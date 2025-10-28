@@ -1,4 +1,4 @@
-﻿import { useCompare } from ".../context/CompareContext.jsx";
+﻿import { useCompare } from "../context/CompareContext.jsx";
 import { FaXmark } from "react-icons/fa6";
 
 export default function CompareModal(){

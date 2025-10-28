@@ -1,7 +1,7 @@
 ﻿import RatingStars from "./RatingStars.jsx";
-import { useShortlist } from ".../context/ShortlistContext.jsx";
+import { useShortlist } from "../context/ShortlistContext.jsx";
 import { Link } from "react-router-dom";
-import { useCompare } from ".../context/CompareContext.jsx";
+import { useCompare } from "../context/CompareContext.jsx";
 
 export default function CardAct({act}){
   const {add} = useShortlist();
