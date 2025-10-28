@@ -1,10 +1,10 @@
-﻿import { createRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ShortlistProvider } from "../context/ShortlistContext.jsx";
 import { CompareProvider } from "../context/CompareContext.jsx";
 import ShortlistDrawer from "./ShortlistDrawer.jsx";
 import CompareModal from "./CompareModal.jsx";
-import Footer from "./components/Footer.jsx";
+import Footer from "./Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Acts from "./pages/Acts.jsx";
 import Venues from "./pages/Venues.jsx";
@@ -48,3 +48,4 @@ createRoot(document.getElementById("root")).render(
     </ShortlistProvider>
   </BrowserRouter>
 );
+
