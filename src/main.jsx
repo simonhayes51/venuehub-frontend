@@ -1,4 +1,5 @@
-﻿import { createRoot } from "react-dom/client";
+﻿import HeroNeon from './components/HeroNeon';
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { ShortlistProvider } from "./context/ShortlistContext.jsx";
@@ -52,3 +53,4 @@ createRoot(document.getElementById("root")).render(
     </ShortlistProvider>
   </BrowserRouter>
 );
+
