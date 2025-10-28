@@ -1,4 +1,4 @@
-// src/pages/admin/Admin.jsx
+﻿// src/pages/admin/Admin.jsx
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE?.replace(/\/+$/,"") || "";
@@ -40,7 +40,7 @@ function Section({ title, endpoint, token, columns, rowKey = "id" }) {
       <div className="flex items-center justify-between gap-2 mb-3">
         <h3 className="text-lg font-semibold">{title}</h3>
         <button onClick={load} className="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20">
-          {loading ? "Refreshing…" : "Refresh"}
+          {loading ? "Refreshingâ€¦" : "Refresh"}
         </button>
       </div>
 
@@ -113,7 +113,7 @@ export default function Admin() {
     ],
     reviews: [
       { key: "id", label: "ID" },
-      { key: "rating", label: "★" },
+      { key: "rating", label: "â˜…" },
       { key: "comment", label: "Comment" },
       { key: "author_name", label: "Author" },
       { key: "act_id", label: "Act" },
@@ -168,3 +168,17 @@ export default function Admin() {
     </div>
   );
 }
+
+  function renderSubmissionRow(s){
+    const payload = s.payload || {};
+    return (
+      <tr key={s.id}>
+        <td>{s.id}</td>
+        <td>{s.role}</td>
+        <td style={{maxWidth:420, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>
+          {payload.name || payload.title || payload.email || JSON.stringify(payload).slice(0,80)}
+        </td>
+        <td>{s.status}</td>
+      </tr>
+    );
+  }
