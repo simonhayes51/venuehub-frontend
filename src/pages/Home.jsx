@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 
 export default function Home(){
   const logos = ["LiveNation","WeddingsCo","EventFlow","PartyPro","StageX","SoundWave","BrightNights","MagicCircle"];
@@ -19,7 +19,7 @@ export default function Home(){
             <span className="text-brand-blue">& venues</span>
           </h1>
           <p className="text-white/70 mt-5 max-w-2xl">
-            A modern marketplace where bands, DJs, magicians and stunning venues meet. Compare, shortlist, and enquire — we don’t take payment; you deal direct. We monetize through premium visibility & business insights.
+            A modern marketplace where bands, DJs, magicians and stunning venues meet. Compare, shortlist, and enquire â€” we donâ€™t take payment; you deal direct. We monetize through premium visibility & business insights.
           </p>
           <div className="mt-7 flex gap-3">
             <Link to="/acts" className="btn">Find Acts</Link>
@@ -46,10 +46,10 @@ export default function Home(){
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mt-6">
           {[
-            ["⚡","Fast search","Zero clutter — get to shortlists quicker."],
-            ["🎯","Quality leads","Enquiries with full context & intent."],
-            ["💡","Insights","Upgrade for visibility, analytics, badges."],
-            ["🔒","You control","Deal direct. We never hold your money."]
+            ["âš¡","Fast search","Zero clutter â€” get to shortlists quicker."],
+            ["ðŸŽ¯","Quality leads","Enquiries with full context & intent."],
+            ["ðŸ’¡","Insights","Upgrade for visibility, analytics, badges."],
+            ["ðŸ”’","You control","Deal direct. We never hold your money."]
           ].map(([icon,title,copy],i)=>(
             <div key={i} className="card p-5 spotlight">
               <div className="text-2xl">{icon}</div>
@@ -65,8 +65,8 @@ export default function Home(){
         <div className="mt-4 flex gap-4 overflow-x-auto snap-row pb-2">
           {testi.map((t,i)=>(
             <figure key={i} className="card p-5 min-w-[320px] snap-item">
-              <blockquote className="text-white/90">“{t.q}”</blockquote>
-              <figcaption className="text-sm text-white/60 mt-2">— {t.a}</figcaption>
+              <blockquote className="text-white/90">â€œ{t.q}â€</blockquote>
+              <figcaption className="text-sm text-white/60 mt-2">â€” {t.a}</figcaption>
             </figure>
           ))}
         </div>

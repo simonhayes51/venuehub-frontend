@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Gallery from "../components/Gallery.jsx";
 import Reviews from "../components/Reviews.jsx";
 import EnquiryForm from "../components/EnquiryForm.jsx";
-import { useShortlist } from "../context/ShortlistContext.jsx";
+import { useShortlist } from ".../context/ShortlistContext.jsx";
 
 const API = import.meta.env.VITE_API_BASE || "";
 
@@ -29,10 +29,10 @@ export default function ActDetail(){
         <Gallery images={images}/>
         <div className="card p-5">
           <h1 className="text-2xl font-semibold">{data?.name}</h1>
-          <div className="text-white/60 text-sm">{data?.genre} • {data?.location}</div>
+          <div className="text-white/60 text-sm">{data?.genre} â€¢ {data?.location}</div>
           <div className="text-white/70 mt-3">{data?.bio || "No description provided."}</div>
           <div className="mt-4 flex gap-2">
-            {data?.price_from && <span className="pill">From £{data.price_from}</span>}
+            {data?.price_from && <span className="pill">From Â£{data.price_from}</span>}
             <button className="pill" onClick={()=>add("acts", data)}>Save</button>
           </div>
         </div>
