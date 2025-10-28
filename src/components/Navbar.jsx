@@ -4,7 +4,6 @@ import { ShortlistProvider } from "../context/ShortlistContext.jsx";
 import { CompareProvider } from "../context/CompareContext.jsx";
 import ShortlistDrawer from "./ShortlistDrawer.jsx";
 import CompareModal from "./CompareModal.jsx";
-import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Acts from "./pages/Acts.jsx";
