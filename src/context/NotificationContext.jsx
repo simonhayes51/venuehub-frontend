@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useState, useEffect } from 'react';
+﻿import { createContext, useContext, useState } from 'react';
 import { FaCheck, FaTimes, FaExclamationTriangle, FaInfoCircle } from 'react-icons/fa';
 
 const NotificationContext = createContext();
@@ -58,7 +58,7 @@ function Notification({ id, message, type, onClose }) {
   };
 
   return (
-    <div className={card p-4 flex items-center gap-3 border-2  animate-fade-in backdrop-blur-xl}>
+    <div className={`card p-4 flex items-center gap-3 border-2 `{colors[type]}` animate-fade-in backdrop-blur-xl`}>
       <div className="text-2xl">{icons[type]}</div>
       <div className="flex-1 font-bold">{message}</div>
       <button onClick={onClose} className="pill">
@@ -69,5 +69,14 @@ function Notification({ id, message, type, onClose }) {
 }
 
 export function useNotifications() {
-  return useContext(NotificationContext);
+  const context = useContext(NotificationContext);
+  if (!context) {
+    return {
+      success: () => {},
+      error: () => {},
+      warning: () => {},
+      info: () => {}
+    };
+  }
+  return context;
 }
