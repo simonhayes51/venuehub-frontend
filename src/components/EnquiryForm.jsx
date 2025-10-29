@@ -20,7 +20,7 @@ export default function EnquiryForm({targetType, targetId}){
     if (!form.name.trim()) newErrors.name = "Name is required";
     if (!form.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+    } else if (!/\S+`\S+\.\S+/.test(form.email)) {
       newErrors.email = "Email is invalid";
     }
     setErrors(newErrors);
@@ -33,7 +33,7 @@ export default function EnquiryForm({targetType, targetId}){
 
     try{
       setStatus("sending");
-      const res = await fetch(`{API}/enquiries`,{
+      const res = await fetch('`'$`'{API}`'/enquiries'`',{
         method:"POST", 
         headers:{ "Content-Type":"application/json" },
         body: JSON.stringify({ ...form, [targetType+"_id"]: targetId })
@@ -61,7 +61,7 @@ export default function EnquiryForm({targetType, targetId}){
           <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9b5cff] opacity-50" />
           <input 
             required 
-            className={`w-full pl-12 bg-white/5 border border-line rounded-xl px-3 py-2 `{errors.name ? "border-[#ff2a6d]" : ""}`}
+            className={'`'w-full pl-12 bg-white/5 border border-line rounded-xl px-3 py-2 $`'{errors.name ? "border-[#ff2a6d]" : ""}`''`'}
             placeholder="Your Name"  
             name="name"  
             value={form.name} 
@@ -77,7 +77,7 @@ export default function EnquiryForm({targetType, targetId}){
           <input 
             required 
             type="email"
-            className={`w-full pl-12 bg-white/5 border border-line rounded-xl px-3 py-2 `{errors.email ? "border-[#ff2a6d]" : ""}`}
+            className={'`'w-full pl-12 bg-white/5 border border-line rounded-xl px-3 py-2 $`'{errors.email ? "border-[#ff2a6d]" : ""}`''`'}
             placeholder="Email"      
             name="email" 
             value={form.email} 

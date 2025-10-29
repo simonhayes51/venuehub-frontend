@@ -58,7 +58,7 @@ function Notification({ id, message, type, onClose }) {
   };
 
   return (
-    <div className={`card p-4 flex items-center gap-3 border-2 `{colors[type]}` animate-fade-in backdrop-blur-xl`}>
+    <div className={'`'card p-4 flex items-center gap-3 border-2 $`'{colors[type]}`' animate-fade-in backdrop-blur-xl'`'}>
       <div className="text-2xl">{icons[type]}</div>
       <div className="flex-1 font-bold">{message}</div>
       <button onClick={onClose} className="pill">
