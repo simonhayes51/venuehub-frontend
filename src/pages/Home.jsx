@@ -41,19 +41,19 @@ export default function Home(){
 
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="container-h py-20 md:py-28">
+        <div className="container-h py-12 md:py-16">
           <div className="max-w-3xl">
             <p className="retro-badge mb-6 flex items-center gap-2">
               <FaBolt className="text-[#fffc00]" /> 10,000+ Events Booked
             </p>
-            <h1 className="font-display neon-text flicker text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] mb-6">
+            <h1 className="font-display neon-text text-[clamp(2.2rem,8vw,4.8rem)] font-black leading-[0.95] mb-6">
               BOOK THE<br/> FUTURE NOW
             </h1>
             <p className="text-xl opacity-80 max-w-xl mb-8">
               Neon-fast search • Glowing profiles • Real reviews. Find the perfect act or venue in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="/search" className="btn text-lg px-8 py-4"><FaBolt/> Find Entertainment</a>
+              <a href="/search" className="btn text-base px-7 py-3"><FaBolt/> Find Entertainment</a>
               <a href="/join" className="pill">Become a Provider</a>
             </div>
           </div>
@@ -150,3 +150,4 @@ export default function Home(){
     </main>
   );
 }
+
