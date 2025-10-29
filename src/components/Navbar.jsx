@@ -1,8 +1,30 @@
-﻿import { useState } from "react";
+﻿import React from 'react';
+const API = import.meta.env.VITE_API_URL || '';
+import { useState } from "react";
 
-export default function Navbar(){
+export default function Navbar(
+  const [done,setDone] = React.useState(null); // done
+
+  const [error,setError] = React.useState(''); // error
+
+  const [busy,setBusy] = React.useState(false); // busy
+
+  const [preview,setPreview] = React.useState(''); // preview
+
+  const [image,setImage] = React.useState(null); // image
+
+  const [price,setPrice] = React.useState(''); // price
+
+  const [description,setDescription] = React.useState(''); // description
+){
   const [open, setOpen] = useState(false);
-  return (
+    function onPick(e){
+    const f = e.target.files?.[0] || null;
+    setImage(f);
+    setPreview(f ? URL.createObjectURL(f) : "");
+  }
+
+
     <header className="sticky top-0 z-40 bg-[#0b0f13]/85 backdrop-blur border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2">
@@ -38,4 +60,5 @@ export default function Navbar(){
     </header>
   );
 }
+
 
