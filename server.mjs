@@ -10,7 +10,13 @@ const port = process.env.PORT || 8080;
 
 const dist = path.join(__dirname, "dist");
 app.use(express.static(dist));
-app.get("/*", (_req, res) => res.sendFile(path.join(dist, "index.html")));
+
+/**
+ * SPA fallback: serve index.html for any GET that wasn't
+ * matched by a static file (regex avoids path-to-regexp parsing).
+ */
+app.get(/.*/, (_req, res) => {
+  res.sendFile(path.join(dist, "index.html"));
+});
 
 app.listen(port, () => console.log(`[venuehub] serving dist on :${port}`));
-
