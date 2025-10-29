@@ -1,15 +1,8 @@
-﻿/* Neon theme – retro/dark */
-:root{
-  --bg:#0a0d24;
-  --panel:rgba(15,20,48,.65);
-  --stroke:rgba(255,255,255,.10);
-  --text:#e9ecf5;
-  --muted:#b7c0d8;
-  --neon1:#ff2fd6;
-  --neon2:#00ffe1;
+﻿:root{
+  --bg:#0a0d24; --panel:rgba(15,20,48,.65); --stroke:rgba(255,255,255,.10);
+  --text:#e9ecf5; --muted:#b7c0d8; --neon1:#ff2fd6; --neon2:#00ffe1;
   --shadow:0 0 0 1px rgba(255,255,255,.02) inset, 0 12px 50px rgba(0,0,0,.45);
 }
-
 html,body,#root{height:100%;}
 body{
   background:
@@ -18,38 +11,12 @@ body{
     linear-gradient(180deg, #060819, #0a0d24 40%, #0b102a 100%);
   color:var(--text);
 }
-
-.neon-card{
-  background:var(--panel);
-  border:1px solid var(--stroke);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-}
-
-.btn-neon{
-  display:inline-block;
-  padding:.8rem 1.1rem;
-  border-radius:14px;
-  font-weight:800;
-  color:#0b0f1e;
-  background:linear-gradient(90deg,var(--neon1),var(--neon2));
-}
-
-.input, .input-file, .field select, .field textarea{
-  width:100%;
-  background:#0f1430;
-  color:var(--text);
-  border:1px solid var(--stroke);
-  border-radius:12px;
-  padding:.65rem .8rem;
-}
-
-.field > span{
-  font-size:.85rem; opacity:.8; margin-bottom:.35rem;
-}
-
-.notice{
-  border-radius:14px; padding:12px 14px; border:1px solid var(--stroke);
-}
+.neon-card{ background:var(--panel); border:1px solid var(--stroke); border-radius:18px; box-shadow:var(--shadow); }
+.btn-neon{ display:inline-block; padding:.8rem 1.1rem; border-radius:14px; font-weight:800; color:#0b0f1e;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2)); }
+.input, .input-file, .field select, .field textarea{ width:100%; background:#0f1430; color:var(--text);
+  border:1px solid var(--stroke); border-radius:12px; padding:.65rem .8rem; }
+.field>span{ font-size:.85rem; opacity:.8; margin-bottom:.35rem; }
+.notice{ border-radius:14px; padding:12px 14px; border:1px solid var(--stroke); }
 .notice.success{ background:#0f1430; }
 .notice.error{ background:#2b1322; border-color:rgba(255,100,140,.35); }
