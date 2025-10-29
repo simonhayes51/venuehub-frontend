@@ -1163,3 +1163,241 @@ h4.section-eyebrow {
   transition:width .35s ease, height .35s ease, opacity .45s ease; opacity:0;
 }
 .feature-card .btn:hover::after{ width:220%; height:220%; opacity:.22 }
+
+/* ===================================================================
+   VENUEHUB – VICE CITY / MTV NEON THEME (FULL APP)
+   Scope: global bg + type, nav, hero, stats, cards, listings, forms,
+          tabs, pills, pagination, shortlist dock, modals, toasts, footer.
+   NOTE: CSS-only; no JSX changes required.
+=================================================================== */
+
+/* -------- Palette -------- */
+:root{
+  --vh-ink:#0a0118;         /* deep blackcurrant */
+  --vh-ink-2:#140a29;       /* indigo */
+  --vh-panel:#17122b;       /* panels */
+  --vh-line:#2b2552;        /* borders */
+  --vh-cyan:#00fff9;        /* neon cyan */
+  --vh-pink:#ff2a6d;        /* neon pink */
+  --vh-purple:#9b5cff;      /* neon purple */
+  --vh-yellow:#fffc00;      /* badges */
+  --vh-lime:#05ffa1;        /* success */
+  --vh-text:#f4f2ff;        /* main copy */
+
+  --vh-radius:22px;
+  --vh-radius-pill:999px;
+}
+
+/* -------- Global Background + Baseline -------- */
+html,body{
+  background:
+    radial-gradient(120% 80% at 50% -10%, #2b1c55 0%, transparent 60%),
+    radial-gradient(120% 80% at 50% 110%, #251342 0%, transparent 60%),
+    repeating-linear-gradient( to bottom, rgba(255,255,255,.035) 0 2px, transparent 2px 40px),
+    linear-gradient(180deg, #0a0118 0%, #140a29 100%) !important;
+  color:var(--vh-text);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+main,.container-h,.page,.page-shell{ background:transparent !important }
+
+/* -------- Typography -------- */
+h1,h2,h3{
+  letter-spacing:.01em;
+  text-wrap:balance;
+}
+h1,.hero-title{
+  background:linear-gradient(90deg,var(--vh-cyan),var(--vh-purple));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 0 30px rgba(0,255,249,.20);
+  font-weight:900;
+}
+h2.section-title{ color:#fff; font-weight:900 }
+p{ color:#dcd9ff; opacity:.95 }
+
+/* -------- Nav (floating) -------- */
+header, .navbar, .nav {
+  background:
+    radial-gradient(90% 100% at 50% 0%, rgba(155,92,255,.18), transparent 60%),
+    linear-gradient(180deg,#20193d,#13102a) !important;
+  border:2px solid var(--vh-line) !important;
+  border-radius:26px;
+  box-shadow:0 10px 0 rgba(0,0,0,.4), 0 18px 44px rgba(0,255,249,.12);
+  position:sticky; top:10px; z-index:50;
+  backdrop-filter:saturate(1.2) blur(6px);
+}
+.nav a, .navbar a{ color:#fff !important; font-weight:900 }
+.nav a:hover{ color:var(--vh-cyan) !important; text-shadow:0 0 14px rgba(0,255,249,.35) }
+
+/* -------- Hero -------- */
+.hero, .hero-wrap{
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(155,92,255,.18), transparent 45%),
+    radial-gradient(100% 70% at 100% 0%, rgba(0,255,249,.15), transparent 45%),
+    linear-gradient(180deg,#1b1635,#0f0b25) !important;
+  border:2px solid var(--vh-line);
+  border-radius:var(--vh-radius);
+  box-shadow:0 14px 0 rgba(0,0,0,.35), 0 24px 64px rgba(155,92,255,.18);
+}
+
+/* -------- Eyebrow / Badge -------- */
+.section-eyebrow{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.35rem .75rem; border-radius:var(--vh-radius-pill);
+  font-weight:900; text-transform:uppercase; letter-spacing:.06em;
+  background:linear-gradient(90deg,#00E5FF22,#7B3CFF22);
+  border:2px solid var(--vh-line);
+  color:#e8e4ff;
+  box-shadow:0 6px 0 rgba(0,0,0,.15), inset 0 0 0 2px rgba(255,255,255,.06);
+}
+
+/* -------- Cards (generic) -------- */
+.card{
+  border:2px solid var(--vh-line) !important;
+  border-radius:var(--vh-radius) !important;
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(155,92,255,.12), transparent 45%),
+    radial-gradient(100% 70% at 100% 0%, rgba(0,255,249,.10), transparent 45%),
+    linear-gradient(180deg,#1b1635,#0f0b25) !important;
+  box-shadow:0 10px 0 rgba(0,0,0,.35), 0 16px 40px rgba(155,92,255,.18) !important;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+  overflow:hidden; isolation:isolate;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--vh-purple);
+  box-shadow:0 16px 0 rgba(0,0,0,.35), 0 24px 60px rgba(0,255,249,.22);
+  filter:saturate(1.05);
+}
+.card h3,.card .title{ color:#fff; font-weight:900 }
+.card p{ color:#d9d6ff }
+
+/* Card sheen sweep */
+.card::after{
+  content:""; position:absolute; top:-30%; left:-25%;
+  width:60%; height:160%;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.18), rgba(255,255,255,0));
+  transform:rotate(22deg) translateX(-40%);
+  transition:transform .6s ease, opacity .35s ease; opacity:0;
+  pointer-events:none;
+}
+.card:hover::after{ transform:rotate(22deg) translateX(150%); opacity:1 }
+
+/* -------- Stats -------- */
+.stat{
+  border:2px solid var(--vh-line); border-radius:var(--vh-radius);
+  background:
+    radial-gradient(120% 90% at 0% 0%, rgba(155,92,255,.10), transparent 45%),
+    linear-gradient(180deg,#211a41,#110c25);
+  box-shadow:0 10px 0 rgba(0,0,0,.35), 0 18px 44px rgba(0,255,249,.12);
+}
+.stat .value{ 
+  background:linear-gradient(90deg,var(--vh-cyan),var(--vh-purple));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-weight:900; text-shadow:0 0 20px rgba(0,255,249,.22);
+}
+.stat .label{ color:#e9e6ff; opacity:.9; font-weight:800 }
+
+/* -------- Listings (acts/venues) -------- */
+.skeleton, .card .media, .card img:where([src=""],[src="#"]){
+  background:linear-gradient(90deg,#221b43 0%, #2d2754 50%, #221b43 100%);
+  background-size:200% 100%; animation:vh-shimmer 1.6s linear infinite;
+  min-height:220px; border-bottom:2px solid var(--vh-line);
+}
+@keyframes vh-shimmer{ 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+.stars svg, .stars, .fa-star{
+  color:var(--vh-yellow) !important; filter:drop-shadow(0 0 6px rgba(255,252,0,.35));
+}
+
+/* -------- Buttons -------- */
+.btn{
+  border:2px solid var(--vh-line) !important; border-radius:16px !important;
+  font-weight:900 !important; letter-spacing:.02em;
+  position:relative; overflow:hidden;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn-primary,.btn--primary,.btn.accent{
+  background:linear-gradient(90deg,var(--vh-purple),var(--vh-cyan)) !important;
+  color:#0a0118 !important; box-shadow:0 8px 26px rgba(0,255,249,.25);
+}
+.btn-outline,.btn.hollow{
+  background:transparent !important; color:#fff !important;
+  border-color:var(--vh-purple) !important; box-shadow:inset 0 0 0 1px rgba(155,92,255,.45);
+}
+.btn:hover{ transform:translateY(-2px) scale(1.01); filter:saturate(1.08) }
+.btn::after{
+  content:""; position:absolute; left:50%; top:50%; width:0; height:0;
+  border-radius:999px; background:rgba(255,255,255,.45);
+  transform:translate(-50%,-50%); transition:width .35s ease, height .35s ease, opacity .45s ease; opacity:0;
+}
+.btn:hover::after{ width:220%; height:220%; opacity:.22 }
+
+/* -------- Pills / Chips / Badges -------- */
+.pill,.chip,.tag{
+  border:2px solid var(--vh-line); border-radius:var(--vh-radius-pill);
+  background:linear-gradient(180deg,#211b41,#130e27);
+  color:#fff; font-weight:800;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.pill.is-active,.chip.is-active{ border-color:var(--vh-cyan); box-shadow:0 0 0 6px rgba(0,255,249,.12) }
+
+/* -------- Inputs / Selects / Search -------- */
+input,select,textarea{
+  background:linear-gradient(180deg,#201b3d,#120e26) !important;
+  border:2px solid var(--vh-line) !important; color:#fff !important;
+  border-radius:14px !important;
+  box-shadow:0 6px 0 rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+}
+input:focus,select:focus,textarea:focus{
+  outline:none !important; border-color:var(--vh-cyan) !important;
+  box-shadow:0 8px 0 rgba(0,0,0,.35), 0 0 0 6px rgba(0,255,249,.18), inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+/* -------- Tabs / Pagination -------- */
+.tabs,.tabbar{
+  background:linear-gradient(180deg,#1f1a3f,#120e26);
+  border:2px solid var(--vh-line); border-radius:var(--vh-radius);
+}
+.tabs .tab.is-active{ color:var(--vh-cyan); font-weight:900 }
+.pagination .page, .pagination .next, .pagination .prev{
+  border:2px solid var(--vh-line); background:#181236; color:#fff; border-radius:12px;
+}
+.pagination .page.is-active{ border-color:var(--vh-purple); box-shadow:0 0 0 6px rgba(155,92,255,.18) }
+
+/* -------- Modals / Popovers -------- */
+.modal, .popover, .dropdown-menu{
+  background:linear-gradient(180deg,#1c1738,#0f0b25) !important;
+  border:2px solid var(--vh-line) !important;
+  box-shadow:0 16px 0 rgba(0,0,0,.4), 0 32px 70px rgba(0,255,249,.18) !important;
+  border-radius:20px !important; color:#fff;
+}
+
+/* -------- Toasts / Notifications -------- */
+.toast, .notice{
+  background:linear-gradient(180deg,#1e1740,#120d28);
+  border:2px solid var(--vh-line); color:#fff; border-radius:14px;
+  box-shadow:0 10px 0 rgba(0,0,0,.35), 0 22px 60px rgba(155,92,255,.22);
+}
+.toast.success{ border-color:var(--vh-lime) }
+.toast.error{ border-color:var(--vh-pink) }
+
+/* -------- Shortlist Dock -------- */
+.shortlist, .shortlist-dock{
+  background:linear-gradient(180deg,#1c1536,#0e0a21);
+  border:2px solid var(--vh-line); border-radius:20px 20px 0 0;
+  box-shadow:0 -10px 0 rgba(0,0,0,.35), 0 -22px 60px rgba(155,92,255,.20);
+  color:#fff;
+}
+
+/* -------- Footer -------- */
+footer{
+  background:linear-gradient(180deg,#120c26,#0a0718);
+  border-top:2px solid var(--vh-line);
+  color:#cfc9ff;
+}
+
+/* -------- Utilities -------- */
+.neon-cyan{ color:var(--vh-cyan) } .neon-pink{ color:var(--vh-pink) }
+.neon-purple{ color:var(--vh-purple) } .neon-yellow{ color:var(--vh-yellow) }
+.glow { text-shadow:0 0 14px rgba(0,255,249,.35) }
+.shadow-lg-neon{ box-shadow:0 16px 0 rgba(0,0,0,.35), 0 24px 60px rgba(0,255,249,.22) }
