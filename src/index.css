@@ -961,3 +961,83 @@ header.nav-float, .site-header.nav-float, .topbar.nav-float, .app-nav.nav-float 
   border:2px solid var(--vh-line) !important;
   box-shadow: 0 6px 0 rgba(0,0,0,.14) !important;
 }
+
+/* === HYPERCOLOR & INTERACTIONS (Vice City) === */
+:root{
+  --hx-ink:#0F0E14;
+  --hx-line:#1C1B24;
+  --hx-cyan:#00E5FF;
+  --hx-purple:#7B3CFF;
+  --hx-pink:#FF6AAE;
+  --hx-coral:#FF6A88;
+  --hx-lime:#05FFA1;
+  --hx-sun:#FFD760;
+}
+
+/* Gradient tokens */
+.hx-grad-ink { background: linear-gradient(90deg,var(--hx-purple),var(--hx-cyan)); -webkit-background-clip:text; background-clip:text; color:transparent }
+.hx-grad-hot { background: linear-gradient(90deg,var(--hx-pink),var(--hx-coral)); -webkit-background-clip:text; background-clip:text; color:transparent }
+
+/* Buttons — accent + ripple + lift */
+.btn-accent{
+  position:relative; overflow:hidden;
+  background: linear-gradient(90deg,var(--hx-purple),var(--hx-cyan));
+  color:#0f0e14 !important; border:2px solid var(--hx-line) !important;
+}
+.btn-ripple::after{
+  content:""; position:absolute; inset:auto; left:50%; top:50%;
+  width:0; height:0; border-radius:999px; background:rgba(255,255,255,.45);
+  transform:translate(-50%,-50%); transition:width .35s ease, height .35s ease, opacity .45s ease;
+  opacity:.0; pointer-events:none;
+}
+.btn-ripple:hover::after{ width:220%; height:220%; opacity:.22 }
+.btn:hover{ transform:translateY(-2px) }
+
+/* Cards — tilt + glow + brightness */
+.hover-tilt{ transition: transform .2s ease, filter .2s ease, box-shadow .2s ease }
+.hover-tilt:hover{ transform: perspective(800px) rotateX(2.2deg) rotateY(-2.2deg) translateY(-2px) }
+.hover-bright:hover{ filter: brightness(1.02) }
+.hover-glow:hover{ box-shadow: 0 12px 28px rgba(123,60,255,.26) }
+
+/* Stats pop */
+.hover-pop{ transition: transform .18s ease, box-shadow .18s ease }
+.hover-pop:hover{ transform: translateY(-3px) scale(1.01); box-shadow:0 10px 0 rgba(0,0,0,.12) }
+
+/* Icon bob */
+.ico-bob{ display:inline-flex; transition: transform .25s ease }
+.ico-bob:hover{ transform: translateY(-3px) }
+
+/* Fancy underline for links */
+.link-ux{ position:relative; font-weight:800 }
+.link-ux::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
+  background: linear-gradient(90deg,var(--hx-pink),var(--hx-coral));
+  transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
+}
+.link-ux:hover::after{ transform:scaleX(1) }
+
+/* Focus rings */
+:where(a,button,input,select,textarea,.btn,.pill):focus{
+  outline:2px solid transparent; box-shadow:0 0 0 3px rgba(0,229,255,.45), 0 0 0 6px rgba(123,60,255,.25)
+}
+
+/* Badges */
+.badge-hot{ display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .6rem; border:2px solid var(--hx-line);
+  border-radius:999px; background:#fff; font-weight:900 }
+.badge-glow{ background:linear-gradient(90deg,var(--hx-cyan),var(--hx-purple)); color:#0f0e14; }
+
+/* Stronger hero (keep your structure) */
+.hero-band{
+  background: linear-gradient(180deg,#FFE36A 0%, #FF9B50 55%, #FF6A88 100%) !important;
+  border-bottom:2px solid var(--hx-line) !important;
+}
+
+/* Elevate cards/tiles default border */
+.card{ border:2px solid var(--hx-line) !important; box-shadow:0 6px 0 rgba(0,0,0,.14) !important }
+
+/* Stats/Features hook-ups if present */
+.stat{ border:2px solid var(--hx-line) }
+.feature-card .feat-ico{
+  background: linear-gradient(180deg,#EAF6FF,#DFF1FF);
+  border:2px solid var(--hx-line)
+}
