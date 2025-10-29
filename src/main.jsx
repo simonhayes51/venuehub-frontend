@@ -1,6 +1,6 @@
-﻿import './theme/neon.css';
-import './boot/submitRoute.js';
-import './boot/fetchPatch.js';
+﻿import "./theme/neon.css";
+import "./boot/submitRoute.js";
+import "./boot/fetchPatch.js";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
@@ -23,7 +23,7 @@ import Onboard from "./pages/Onboard.jsx";
 import Leads from "./pages/Leads.jsx";
 import Admin from "./pages/admin/Admin.jsx";
 
-function Shell(){
+function Shell() {
   return (
     <>
       <Navbar/>

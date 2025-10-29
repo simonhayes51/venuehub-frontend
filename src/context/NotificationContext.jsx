@@ -9,12 +9,7 @@ export function NotificationProvider({ children }) {
   const addNotification = (message, type = 'info', duration = 5000) => {
     const id = Date.now();
     setNotifications(prev => [...prev, { id, message, type, duration }]);
-    
-    if (duration > 0) {
-      setTimeout(() => {
-        removeNotification(id);
-      }, duration);
-    }
+    if (duration > 0) setTimeout(() => removeNotification(id), duration);
   };
 
   const removeNotification = (id) => {
@@ -58,10 +53,10 @@ function Notification({ id, message, type, onClose }) {
   };
 
   return (
-    <div className={'`'card p-4 flex items-center gap-3 border-2 $`'{colors[type]}`' animate-fade-in backdrop-blur-xl'`'}>
+    <div className={`card p-4 flex items-center gap-3 border-2 ${colors[type]} animate-fade-in backdrop-blur-xl`}>
       <div className="text-2xl">{icons[type]}</div>
       <div className="flex-1 font-bold">{message}</div>
-      <button onClick={onClose} className="pill">
+      <button onClick={onClose} className="pill" aria-label="Close notification">
         <FaTimes />
       </button>
     </div>
@@ -69,14 +64,5 @@ function Notification({ id, message, type, onClose }) {
 }
 
 export function useNotifications() {
-  const context = useContext(NotificationContext);
-  if (!context) {
-    return {
-      success: () => {},
-      error: () => {},
-      warning: () => {},
-      info: () => {}
-    };
-  }
-  return context;
+  return useContext(NotificationContext);
 }
