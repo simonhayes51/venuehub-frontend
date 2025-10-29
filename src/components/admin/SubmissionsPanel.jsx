@@ -1,31 +1,42 @@
-﻿import React from 'react';
-
+﻿import React from "react";
 const API = import.meta.env.VITE_API_URL;
 
 export default function SubmissionsPanel(){
   const [rows, setRows] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const [err, setErr] = React.useState('');
+  const [err, setErr] = React.useState("");
 
   async function load(){
     try{
-      setLoading(true); setErr('');
-      const r = await fetch(\\/api/admin/submissions\);
+      setLoading(true); setErr("");
+      const r = await fetch(`${API}/api/admin/submissions`);
       const data = await r.json();
       setRows(Array.isArray(data) ? data : []);
-    }catch(e){ setErr('Failed to load submissions'); console.error(e); }
-    finally{ setLoading(false); }
+    }catch(e){
+      setErr("Failed to load submissions");
+      console.error(e);
+    }finally{
+      setLoading(false);
+    }
   }
 
   async function approve(id){
     try{
-      const r = await fetch(\\/api/admin/submissions/\/approve\, { method:'POST' });
-      if(!r.ok) throw new Error(\Approve failed \\);
+      const r = await fetch(`${API}/api/admin/submissions/${id}/approve`, { method:"POST" });
+      if(!r.ok) throw new Error(`Approve failed ${r.status}`);
       await load();
     }catch(e){ alert(e.message); }
   }
 
-  React.useEffect(()=>{ load(); const t = setInterval(load, 10000); return ()=>clearInterval(t); },[]);
+  async function reject(id){
+    try{
+      const r = await fetch(`${API}/api/admin/submissions/${id}/reject`, { method:"POST" });
+      if(!r.ok) throw new Error(`Reject failed ${r.status}`);
+      await load();
+    }catch(e){ alert(e.message); }
+  }
+
+  React.useEffect(()=>{ load(); const t=setInterval(load,10000); return ()=>clearInterval(t); },[]);
 
   return (
     <div style={{marginTop:16}}>
@@ -64,10 +75,15 @@ export default function SubmissionsPanel(){
                     </details>
                   </td>
                   <td style={{padding:'10px 8px'}}>{s.status}</td>
-                  <td style={{padding:'10px 8px'}}>
+                  <td style={{padding:'10px 8px',display:'flex',gap:8}}>
                     {s.status !== 'approved' &&
                       <button onClick={()=>approve(s.id)} style={{padding:'8px 10px',borderRadius:10,border:'none',background:'linear-gradient(90deg,#ff2fd6,#00ffe1)',color:'#0b0f1e',fontWeight:800}}>
                         Approve
+                      </button>
+                    }
+                    {s.status !== 'rejected' &&
+                      <button onClick={()=>reject(s.id)} style={{padding:'8px 10px',borderRadius:10,border:'1px solid rgba(255,255,255,.2)',background:'#0f1430',color:'#e9ecf5',fontWeight:700}}>
+                        Reject
                       </button>
                     }
                   </td>
@@ -82,4 +98,3 @@ export default function SubmissionsPanel(){
     </div>
   );
 }
-
