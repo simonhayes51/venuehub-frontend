@@ -41,7 +41,7 @@ export default function Home(){
 
       {/* HERO */}
       <section className="sunset-band section">
-        <div className="container-h py-12 md:py-16">
+        <div className="container-h section--stats">
           <div className="max-w-3xl">
             <p className="retro-badge mb-6 flex items-center gap-2">
               <FaBolt className="text-[#fffc00]" /> 10,000+ Events Booked
@@ -62,16 +62,16 @@ export default function Home(){
 
       {/* STATS */}
       <section className="sunset-band section">
-        <div className="grid sm:grid-cols-3 gap-4">
-          <div className="card p-6 text-center stat-card">
+        <div className="feature-grid">
+          <div className="stat">
             <div className="text-4xl font-black neon-text">{events.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Events</div>
           </div>
-          <div className="card p-6 text-center stat-card">
+          <div className="stat">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #ff2a6d'}}>{pros.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Professionals</div>
           </div>
-          <div className="card p-6 text-center stat-card">
+          <div className="stat">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #9b5cff'}}>{cities}</div>
             <div className="opacity-70 font-bold">Cities</div>
           </div>
@@ -80,7 +80,7 @@ export default function Home(){
 
       {/* FEATURES */}
       <section className="sunset-band section">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="feature-grid">
           {[
             {icon:<FaMusic/>, title:"Bands & DJs", text:"From indie to Ibiza — plug into any vibe."},
             {icon:<FaMask/>, title:"Magicians & Hosts", text:"Keep crowds buzzing with pro showrunners."},
@@ -89,7 +89,7 @@ export default function Home(){
             {icon:<FaTheaterMasks/>, title:"Stage & Sound", text:"AV, lighting, production — all in one place."},
             {icon:<FaStar/>, title:"Verified Reviews", text:"Real ratings from real events."},
           ].map((f,i)=>(
-            <div key={i} className="card p-6 spotlight">
+            <div key={i} className="feature-card">
               <div className="feat-ico"
                    style={{background:"linear-gradient(135deg, #00fff9 0%, #9b5cff 100%)"}}>
                 {f.icon}
@@ -104,7 +104,7 @@ export default function Home(){
       {/* TESTIMONIALS */}
       <section className="sunset-band section">
         <div className="card p-8">
-          <div className="grid md:grid-cols-3 gap-6 items-center">
+          <div className="feature-grid">
             <div className="md:col-span-1">
               <h2 className="font-display text-3xl font-black mb-2 neon-text">Loved by Planners</h2>
               <p className="opacity-80">5-star experiences from people who actually booked.</p>
@@ -112,7 +112,7 @@ export default function Home(){
             <div className="md:col-span-2">
               <div className="relative overflow-hidden">
                 <div className="animate-fade-in">
-                  <div className="card p-6 bg-black/40">
+                  <div className="feature-card">
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-bold">{testimonials[idx].name}</div>
                       <div className="text-[#fffc00] flex gap-1"><FaStar/><FaStar/><FaStar/><FaStar/><FaStar/></div>
@@ -150,6 +150,7 @@ export default function Home(){
     </main>
   );
 }
+
 
 
 
