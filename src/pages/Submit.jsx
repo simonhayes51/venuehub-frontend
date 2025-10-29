@@ -23,8 +23,7 @@ export default function SubmitPage(){
   function onPick(e){
     const f = e.target.files?.[0];
     setImage(f||null);
-    if(f){ const url = URL.createObjectURL(f); setPreview(url); }
-    else setPreview("");
+    setPreview(f ? URL.createObjectURL(f) : "");
   }
 
   async function submit(e){
@@ -53,9 +52,8 @@ export default function SubmitPage(){
       setName(""); setEmail(""); setPhone(""); setLocation(""); setGenres("");
       setPrice(""); setWebsite(""); setDesc(""); setActType(""); setStyle(""); setAmenities("");
       setImage(null); setPreview("");
-    }catch(ex){
-      console.error(ex); setErr("Could not send your details. Please try again.");
-    }finally{ setBusy(false); }
+    }catch(ex){ console.error(ex); setErr("Could not send your details. Please try again."); }
+    finally{ setBusy(false); }
   }
 
   return (
@@ -63,13 +61,12 @@ export default function SubmitPage(){
       <h1 className="text-3xl font-bold mb-2">Add My Services</h1>
       <p className="opacity-80 mb-6">List your act or venue. We review every submission before it goes live.</p>
 
-      {done ? (
+      {done && (
         <div className="rounded-2xl p-5 border border-white/10 bg-[#0f1430] mb-6">
           <div className="font-semibold mb-1">Thanks! We received your submission.</div>
           <div className="opacity-75 text-sm">Reference ID: {done.id}</div>
         </div>
-      ) : null}
-
+      )}
       {err && <div className="mb-4 text-[#ff8a8a]">{err}</div>}
 
       <form onSubmit={submit} className="space-y-4">

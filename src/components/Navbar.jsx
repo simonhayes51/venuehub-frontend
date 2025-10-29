@@ -15,7 +15,7 @@ export default function Navbar(){
           <a href="/pricing">Pricing</a>
           <a href="/search">Search</a>
           <a href="/admin/leads">Admin</a>
-          <a href="/join" className="ml-2 rounded-xl px-3 py-1 bg-emerald-500 text-black font-medium hover:bg-emerald-600">
+          <a href="/submit" href="/join" className="ml-2 rounded-xl px-3 py-1 bg-emerald-500 text-black font-medium hover:bg-emerald-600">
             Add My Services
           </a>
           <a href="/shortlist" className="rounded-xl px-3 py-1 bg-white/10 border border-white/10">Shortlist</a>
@@ -30,7 +30,7 @@ export default function Navbar(){
             <a href="/pricing">Pricing</a>
             <a href="/search">Search</a>
             <a href="/admin/leads">Admin</a>
-            <a href="/join">Add My Services</a>
+            <a href="/submit" href="/join">Add My Services</a>
             <a href="/shortlist">Shortlist</a>
           </div>
         </div>
@@ -38,3 +38,4 @@ export default function Navbar(){
     </header>
   );
 }
+

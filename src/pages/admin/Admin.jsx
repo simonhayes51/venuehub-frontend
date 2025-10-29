@@ -3,11 +3,7 @@ import SubmissionsPanel from "@/components/admin/SubmissionsPanel.jsx";
 
 export default function AdminPage() {
   const [token, setToken] = React.useState(localStorage.getItem("vh_admin_token") || "");
-
-  function saveToken(){
-    localStorage.setItem("vh_admin_token", token.trim());
-    alert("Token saved");
-  }
+  const saveToken = () => { localStorage.setItem("vh_admin_token", token.trim()); alert("Token saved"); };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -20,25 +16,22 @@ export default function AdminPage() {
           placeholder="Paste Bearer token here"
           className="flex-1 bg-[#0f1430] border border-white/10 rounded-xl px-4 py-3"
         />
-        <button
-          onClick={saveToken}
+        <button onClick={saveToken}
           className="px-4 py-3 rounded-xl font-semibold bg-[linear-gradient(90deg,#ff2fd6,#00ffe1)] text-[#0b0f1e]">
           Save
         </button>
       </div>
 
-      {/* Tabs (keep others simple for now) */}
+      {/* real links now */}
       <div className="flex gap-2 mb-4">
-        <a className="px-3 py-2 rounded-xl border border-white/10 opacity-60 pointer-events-none">Acts</a>
-        <a className="px-3 py-2 rounded-xl border border-white/10 opacity-60 pointer-events-none">Venues</a>
-        <a className="px-3 py-2 rounded-xl border border-white/10 opacity-60 pointer-events-none">Bookings</a>
-        <a className="px-3 py-2 rounded-xl border border-white/10 opacity-60 pointer-events-none">Reviews</a>
-        <span className="px-3 py-2 rounded-xl border border-white/20 bg-[#0f1430]">Submissions</span>
+        <a href="/acts"    className="px-3 py-2 rounded-xl border border-white/10 hover:border-white/20">Acts</a>
+        <a href="/venues"  className="px-3 py-2 rounded-xl border border-white/10 hover:border-white/20">Venues</a>
+        <a href="/bookings" className="px-3 py-2 rounded-xl border border-white/10 hover:border-white/20">Bookings</a>
+        <a href="/reviews" className="px-3 py-2 rounded-xl border border-white/10 hover:border-white/20">Reviews</a>
+        <a href="/admin"   className="px-3 py-2 rounded-xl border border-white/20 bg-[#0f1430]">Submissions</a>
       </div>
 
-      {/* Full featured panel: filters + Approve/Reject + bulk + upload */}
       <SubmissionsPanel />
     </div>
   );
 }
-
