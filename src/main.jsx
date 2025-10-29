@@ -1,5 +1,4 @@
-﻿import './boot/fixAddMyServicesLink.js';
-import './boot/submitRoute.js';
+﻿import './boot/submitRoute.js';
 import './boot/fetchPatch.js';
 import HeroNeon from './components/HeroNeon';
 import { createRoot } from "react-dom/client";
@@ -56,6 +55,7 @@ createRoot(document.getElementById("root")).render(
     </ShortlistProvider>
   </BrowserRouter>
 );
+
 
 
 
