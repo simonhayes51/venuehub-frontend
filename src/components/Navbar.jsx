@@ -2,20 +2,21 @@
 
 export default function Navbar() {
   return (
-    <header className="w-full bg-transparent/10 backdrop-blur supports-backdrop-blur sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <a href="/" className="font-black tracking-tight">VenueHub</a>
-        <nav className="flex items-center gap-6 text-sm">
-          <a href="/acts">Acts</a>
-          <a href="/venues">Venues</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/search">Search</a>
-          <a href="/admin">Admin</a>
-          <a href="/submit" className="px-3 py-2 rounded-xl font-semibold text-[#0b0f1e]"
-             style={{ background: "linear-gradient(90deg,#10b981,#34d399)" }}>
-            Add My Services
+    <header className="w-full sticky top-0 z-50 scanlines">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="/" className="font-display font-black text-2xl tracking-tight neon-text">
+          VENUE<span className="text-[#00fff9]">HUB</span>
+        </a>
+        <nav className="flex items-center gap-6 text-sm font-bold uppercase">
+          <a href="/acts" className="hover:text-[#00fff9] transition-colors">Acts</a>
+          <a href="/venues" className="hover:text-[#ff2a6d] transition-colors">Venues</a>
+          <a href="/pricing" className="hover:text-[#9b5cff] transition-colors">Pricing</a>
+          <a href="/search" className="hover:text-[#fffc00] transition-colors">Search</a>
+          <a href="/admin" className="hover:text-[#05ffa1] transition-colors">Admin</a>
+          <a href="/submit" className="retro-badge">
+            + Add Services
           </a>
-          <a href="/shortlist" className="rounded-full border px-3 py-1">Shortlist</a>
+          <a href="/shortlist" className="pill">Shortlist</a>
         </nav>
       </div>
     </header>
