@@ -589,3 +589,104 @@ input:focus, select:focus, textarea:focus{
   box-shadow: 0 10px 24px rgba(34,255,242,.12), 0 6px 20px rgba(255,62,165,.12);
   border-color: rgba(34,255,242,.25);
 }
+
+/* === PRINT-POP THEME (Halfday/SLAC) === */
+@import url('https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@400;700;900&family=Rubik:wght@400;600;900&display=swap');
+
+:root{
+  /* Warm, food/bev palette */
+  --pp-cream:#FFF7E8;
+  --pp-yellow:#FFD54D;
+  --pp-orange:#FF8A34;
+  --pp-coral:#FF5A5F;
+  --pp-teal:#2ED1C3;
+  --pp-teal-dark:#1AA89C;
+  --pp-green:#7BC344;
+  --pp-ink:#1D1B1B;
+  --pp-line:#201f1f;
+}
+
+html, body, #root{ height:100% }
+body{
+  background: var(--pp-cream);
+  color: var(--pp-ink);
+  font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Turn off neon look completely */
+.neon-text, .flicker { text-shadow:none !important; }
+.retro-grid, .retro-grid__scanlines { display:none !important; }
+
+/* Headings: chunky display */
+.font-display{
+  font-family: 'Cooper Hewitt', 'Rubik', system-ui;
+  letter-spacing: .2px;
+}
+
+/* Cards: flat with thick borders + subtle drop shadow */
+.card{
+  background: #fff;
+  border: 3px solid var(--pp-line);
+  border-radius: 18px;
+  box-shadow: 0 8px 0 rgba(0,0,0,.12);
+}
+.spotlight{ transition: transform .15s ease }
+.spotlight:hover{ transform: translateY(-2px) }
+
+/* Buttons: solid print colours (no glow) */
+.btn{
+  background: var(--pp-orange);
+  color:#111;
+  font-weight:900;
+  border:3px solid var(--pp-line);
+  border-radius: 14px;
+  padding:.9rem 1.2rem;
+  box-shadow: 0 6px 0 rgba(0,0,0,.12);
+}
+.btn:hover{ filter: brightness(1.05) }
+.btn:active{ transform: translateY(2px); box-shadow: 0 3px 0 rgba(0,0,0,.12) }
+
+.btn-ink{
+  background: var(--pp-ink);
+  color:#fff;
+  border:3px solid var(--pp-line);
+}
+.btn-teal{
+  background: var(--pp-teal);
+  color:#092524;
+  border:3px solid var(--pp-line);
+}
+
+/* Pills → outlined tags */
+.pill{
+  background: transparent;
+  border:3px solid var(--pp-line);
+  border-radius: 999px;
+  color: var(--pp-ink);
+  font-weight:800;
+}
+
+/* Inputs: flat, outlined */
+input, select, textarea{
+  background:#fff;
+  border:3px solid var(--pp-line) !important;
+  border-radius:12px;
+  color: var(--pp-ink);
+}
+
+/* Simple patterned band (used behind hero if needed) */
+.pattern-band{
+  background:
+    radial-gradient(circle at 8px 8px, rgba(0,0,0,.04) 2px, transparent 0) 0 0/32px 32px,
+    radial-gradient(circle at 16px 16px, rgba(0,0,0,.04) 2px, transparent 0) 0 0/32px 32px,
+    var(--pp-teal);
+}
+
+/* Soft gradient band option */
+.sunset-band{
+  background: linear-gradient(180deg, #FFE679, #FFC05A 45%, #FF8A34);
+}
+
+/* Utility */
+.container-h{ max-width:1200px; margin:0 auto; padding-inline:1rem }
+.grid-cards{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:1rem }

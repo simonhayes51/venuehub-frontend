@@ -40,38 +40,38 @@ export default function Home(){
       <SEO title="VenueHub — Book the Future of Entertainment" description="Find and book the best acts and venues with neon-fast search and jaw-dropping profiles." />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
         <div className="container-h py-12 md:py-16">
           <div className="max-w-3xl">
             <p className="retro-badge mb-6 flex items-center gap-2">
               <FaBolt className="text-[#fffc00]" /> 10,000+ Events Booked
             </p>
-            <h1 className="vc-headline text-[clamp(2.4rem,7vw,5rem)] mb-6">
-  BOOK THE <br/> FUTURE <span className="vc-script">NOW</span>
+            <h1 className="font-display text-[clamp(2.4rem,7vw,4.6rem)] font-black mb-4" style={{textTransform:'uppercase'}}>
+  Book the future now
 </h1>
-            <p className="text-xl opacity-80 max-w-xl mb-8">
+            <p className="text-xl max-w-xl mb-8">
               Neon-fast search • Glowing profiles • Real reviews. Find the perfect act or venue in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="/search" className="btn text-base px-7 py-3"><FaBolt/> Find Entertainment</a>
-              <a href="/join" className="btn-teal text-base px-7 py-3">Become a Provider</a>
+              <a href="/search" className="btn btn-ink"><FaBolt/> Find Entertainment</a>
+              <a href="/join" className="btn btn-ink">Become a Provider</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* STATS */}
-      <section className="container-h pb-10">
+      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
         <div className="grid sm:grid-cols-3 gap-4">
-          <div className="sticker p-6 text-center">
+          <div className="card p-6 text-center">
             <div className="text-4xl font-black neon-text">{events.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Events</div>
           </div>
-          <div className="sticker p-6 text-center">
+          <div className="card p-6 text-center">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #ff2a6d'}}>{pros.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Professionals</div>
           </div>
-          <div className="sticker p-6 text-center">
+          <div className="card p-6 text-center">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #9b5cff'}}>{cities}</div>
             <div className="opacity-70 font-bold">Cities</div>
           </div>
@@ -79,7 +79,7 @@ export default function Home(){
       </section>
 
       {/* FEATURES */}
-      <section className="container-h py-10">
+      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {icon:<FaMusic/>, title:"Bands & DJs", text:"From indie to Ibiza — plug into any vibe."},
@@ -102,7 +102,7 @@ export default function Home(){
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="container-h py-10">
+      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
         <div className="card p-8">
           <div className="grid md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-1">
@@ -137,18 +137,19 @@ export default function Home(){
       </section>
 
       {/* CTA */}
-      <section className="container-h py-16">
+      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
         <div className="card p-10 text-center relative overflow-hidden spotlight">
           <div className="absolute inset-0" style={{background:"linear-gradient(135deg, rgba(0,255,249,.12), rgba(155,92,255,.12))"}} />
           <div className="relative z-10">
             <h2 className="font-display text-4xl md:text-5xl font-black mb-4 neon-text">Become a Premium Provider</h2>
             <p className="text-lg opacity-85 max-w-2xl mx-auto mb-8">Top placement. Verified badge. Advanced analytics. No commission — ever.</p>
-            <a href="/pricing" className="btn text-xl px-10 py-5"><FaBolt/> Power Up</a>
+            <a href="/pricing" className="btn btn-ink"><FaBolt/> Power Up</a>
           </div>
         </div>
       </section>
     </main>
   );
 }
+
 
 
