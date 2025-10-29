@@ -515,3 +515,77 @@ input:focus, select:focus, textarea:focus{
 .flicker{}
 
 
+
+/* === VICE CITY / 90s MTV THEME === */
+@import url('https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Pacifico&display=swap');
+
+:root{
+  --miami-teal:#22fff2;
+  --miami-pink:#ff3ea5;
+  --miami-sunset1:#ff8a00;
+  --miami-sunset2:#ff2a6d;
+  --miami-deep:#0a0816;
+}
+
+/* Softer background vignette */
+.retro-grid::before{
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
+  opacity:.25; /* softer */
+}
+
+/* MTV sticker style card */
+.sticker{
+  border-radius: 1.2rem;
+  background: #12042a;
+  border: 3px solid #1b1230;
+  box-shadow:
+    0 8px 0 #1b1230,
+    0 18px 30px rgba(0,0,0,.35);
+}
+
+/* Vice City headline: chunky + subtle glow + stroke */
+.vc-headline{
+  font-family: 'Bungee', system-ui;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  line-height: .95;
+  background: linear-gradient(180deg, #fff 0%, #d6f7f5 100%);
+  -webkit-background-clip: text; background-clip:text; color: transparent;
+  text-shadow:
+    0 0 .6rem rgba(34,255,242,.35),
+    0 0 1.2rem rgba(255,62,165,.25);
+  -webkit-text-stroke: 2px rgba(10,8,22,.5);
+}
+
+/* Script accent for one word (NOW) */
+.vc-script{
+  font-family: 'Pacifico', cursive;
+  color: var(--miami-teal);
+  text-shadow: 0 0 .4rem rgba(34,255,242,.5);
+}
+
+/* Sunset pill buttons */
+.btn-miami{
+  border-radius: 1rem;
+  font-weight: 900;
+  border: 0;
+  background: linear-gradient(90deg, var(--miami-sunset1), var(--miami-sunset2));
+}
+.btn-miami:hover{ filter: brightness(1.06) }
+
+.btn-teal{
+  border-radius: 1rem; font-weight:900; border:0;
+  background: linear-gradient(90deg, #0fd, #59f5ee);
+}
+.btn-teal:hover{ filter: brightness(1.06) }
+
+/* Tone down old neon */
+.neon-text{ text-shadow: 0 0 .25rem var(--miami-teal), 0 0 .45rem var(--miami-pink) }
+.spotlight:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(34,255,242,.12), 0 6px 20px rgba(255,62,165,.12);
+  border-color: rgba(34,255,242,.25);
+}

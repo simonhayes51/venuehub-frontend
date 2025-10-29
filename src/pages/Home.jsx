@@ -46,15 +46,15 @@ export default function Home(){
             <p className="retro-badge mb-6 flex items-center gap-2">
               <FaBolt className="text-[#fffc00]" /> 10,000+ Events Booked
             </p>
-            <h1 className="font-display neon-text text-[clamp(2.2rem,8vw,4.8rem)] font-black leading-[0.95] mb-6">
-              BOOK THE<br/> FUTURE NOW
-            </h1>
+            <h1 className="vc-headline text-[clamp(2.4rem,7vw,5rem)] mb-6">
+  BOOK THE <br/> FUTURE <span className="vc-script">NOW</span>
+</h1>
             <p className="text-xl opacity-80 max-w-xl mb-8">
               Neon-fast search • Glowing profiles • Real reviews. Find the perfect act or venue in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
               <a href="/search" className="btn text-base px-7 py-3"><FaBolt/> Find Entertainment</a>
-              <a href="/join" className="pill">Become a Provider</a>
+              <a href="/join" className="btn-teal text-base px-7 py-3">Become a Provider</a>
             </div>
           </div>
         </div>
@@ -63,15 +63,15 @@ export default function Home(){
       {/* STATS */}
       <section className="container-h pb-10">
         <div className="grid sm:grid-cols-3 gap-4">
-          <div className="card p-6 spotlight text-center">
+          <div className="sticker p-6 text-center">
             <div className="text-4xl font-black neon-text">{events.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Events</div>
           </div>
-          <div className="card p-6 spotlight text-center">
+          <div className="sticker p-6 text-center">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #ff2a6d'}}>{pros.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Professionals</div>
           </div>
-          <div className="card p-6 spotlight text-center">
+          <div className="sticker p-6 text-center">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #9b5cff'}}>{cities}</div>
             <div className="opacity-70 font-bold">Cities</div>
           </div>
@@ -150,4 +150,5 @@ export default function Home(){
     </main>
   );
 }
+
 
