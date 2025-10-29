@@ -1,64 +1,23 @@
-﻿import React from 'react';
-const API = import.meta.env.VITE_API_URL || '';
-import { useState } from "react";
+﻿import React from "react";
 
-export default function Navbar(
-  const [done,setDone] = React.useState(null); // done
-
-  const [error,setError] = React.useState(''); // error
-
-  const [busy,setBusy] = React.useState(false); // busy
-
-  const [preview,setPreview] = React.useState(''); // preview
-
-  const [image,setImage] = React.useState(null); // image
-
-  const [price,setPrice] = React.useState(''); // price
-
-  const [description,setDescription] = React.useState(''); // description
-){
-  const [open, setOpen] = useState(false);
-    function onPick(e){
-    const f = e.target.files?.[0] || null;
-    setImage(f);
-    setPreview(f ? URL.createObjectURL(f) : "");
-  }
-
-
-    <header className="sticky top-0 z-40 bg-[#0b0f13]/85 backdrop-blur border-b border-white/10">
+export default function Navbar() {
+  return (
+    <header className="w-full bg-transparent/10 backdrop-blur supports-backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
-          <img src="/logo.svg" alt="" onError={(e)=>{e.target.style.display="none"}} className="w-6 h-6"/>
-          <span className="font-semibold">VenueHub</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-6 text-sm">
+        <a href="/" className="font-black tracking-tight">VenueHub</a>
+        <nav className="flex items-center gap-6 text-sm">
           <a href="/acts">Acts</a>
           <a href="/venues">Venues</a>
           <a href="/pricing">Pricing</a>
           <a href="/search">Search</a>
-          <a href="/admin/leads">Admin</a>
-          <a href="/submit" href="/join" className="ml-2 rounded-xl px-3 py-1 bg-emerald-500 text-black font-medium hover:bg-emerald-600">
+          <a href="/admin">Admin</a>
+          <a href="/submit" className="px-3 py-2 rounded-xl font-semibold text-[#0b0f1e]"
+             style={{ background: "linear-gradient(90deg,#10b981,#34d399)" }}>
             Add My Services
           </a>
-          <a href="/shortlist" className="rounded-xl px-3 py-1 bg-white/10 border border-white/10">Shortlist</a>
+          <a href="/shortlist" className="rounded-full border px-3 py-1">Shortlist</a>
         </nav>
-        <button onClick={()=>setOpen(!open)} className="md:hidden rounded-lg px-2 py-1 border border-white/10">Menu</button>
       </div>
-      {open && (
-        <div className="md:hidden border-t border-white/10">
-          <div className="px-4 py-3 flex flex-col gap-2 text-sm">
-            <a href="/acts">Acts</a>
-            <a href="/venues">Venues</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/search">Search</a>
-            <a href="/admin/leads">Admin</a>
-            <a href="/submit" href="/join">Add My Services</a>
-            <a href="/shortlist">Shortlist</a>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
-
-
