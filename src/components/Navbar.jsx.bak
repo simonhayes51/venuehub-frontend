@@ -1,26 +1,12 @@
 ﻿import React from "react";
 
 export default function Navbar() {
-  return (
-    param($m)
-    $pre = $m.Groups[1].Value
-    $cls = $m.Groups[2].Value
-    $post = $m.Groups[3].Value
-    if ($cls -notmatch '\bnav-float\b') { $cls = ($cls + " nav-float container-h").Trim() }
-    return "$pre$cls$post"
->
+  return (<div className="nav-float-shell container-h"><header className="w-full sticky top-0 z-50 scanlines nav-float">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <a href="/" className="font-display font-black text-2xl tracking-tight neon-text">
           VENUE<span className="text-[#00fff9]">HUB</span>
         </a>
-        
-    param($m)
-    $pre = $m.Groups[1].Value
-    $cls = $m.Groups[2].Value
-    $post = $m.Groups[3].Value
-    if ($cls -notmatch '\bnav-float\b') { $cls = ($cls + " nav-float container-h").Trim() }
-    return "$pre$cls$post"
->
+        <nav className="flex items-center gap-6 text-sm font-bold uppercase nav-float">
           <a href="/acts" className="hover:text-[#00fff9] transition-colors">Acts</a>
           <a href="/venues" className="hover:text-[#ff2a6d] transition-colors">Venues</a>
           <a href="/pricing" className="hover:text-[#9b5cff] transition-colors">Pricing</a>
@@ -35,5 +21,4 @@ export default function Navbar() {
     </header>
   );
 }
-
 
