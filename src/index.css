@@ -690,3 +690,76 @@ input, select, textarea{
 /* Utility */
 .container-h{ max-width:1200px; margin:0 auto; padding-inline:1rem }
 .grid-cards{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:1rem }
+
+/* === PRINT-POP REFINEMENT === */
+:root{
+  --pp-cream:#FFF7E8;
+  --pp-cream-2:#FFF1D2;
+  --pp-yellow:#FFE679;
+  --pp-orange:#FF9B50;
+  --pp-ink:#1B1A1A;
+  --pp-line:#1F1E1E;
+  --pp-teal:#25CFC1;
+}
+
+body{ background:var(--pp-cream) }
+
+/* Cards: thinner border + softer shadow + tighter radius */
+.card{
+  border:2px solid var(--pp-line) !important;
+  border-radius:12px !important;
+  box-shadow:0 4px 0 rgba(0,0,0,.10) !important;
+  background:#fff !important;
+}
+
+/* Generic section spacing */
+.section{ padding-block: clamp(28px, 6vw, 72px) }
+.container-h{ max-width:1180px; }
+
+/* Buttons */
+.btn{
+  border:2px solid var(--pp-line) !important;
+  border-radius:12px !important;
+  padding:.8rem 1.1rem !important;
+  font-weight:900 !important;
+  box-shadow:0 3px 0 rgba(0,0,0,.12) !important;
+}
+.btn-primary{ background:var(--pp-ink) !important; color:#fff !important; }
+.btn-primary:hover{ filter:brightness(1.05) }
+.btn-secondary{
+  background:#fff !important; color:var(--pp-ink) !important;
+}
+.btn-secondary:hover{ background:var(--pp-cream-2) !important }
+
+/* Pills now simple tags */
+.pill{
+  background:transparent !important;
+  border:2px solid var(--pp-line) !important;
+  border-radius:999px !important;
+  font-weight:800 !important;
+}
+
+/* Inputs – flat */
+input,select,textarea{
+  background:#fff !important; border:2px solid var(--pp-line) !important; border-radius:10px !important;
+}
+
+/* Hero band: lighter lemon cream gradient */
+.sunset-band{
+  background: linear-gradient(180deg, var(--pp-cream) 0%, var(--pp-yellow) 75%, #FFD27E 100%) !important;
+  border-bottom:2px solid var(--pp-line) !important;
+}
+
+/* Stat cards */
+.stat-card .value{ font-weight:900; font-size:clamp(1.4rem, 3.4vw, 2.2rem) }
+.stat-card .label{ opacity:.75; font-weight:700 }
+
+/* Feature icon */
+.feat-ico{
+  width:46px; height:46px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, #EAF9F6, #D2F3EF);
+  border:2px solid var(--pp-line);
+}
+
+.nav-shadow{ box-shadow: inset 0 -2px 0 rgba(0,0,0,.08) }

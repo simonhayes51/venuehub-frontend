@@ -40,7 +40,7 @@ export default function Home(){
       <SEO title="VenueHub — Book the Future of Entertainment" description="Find and book the best acts and venues with neon-fast search and jaw-dropping profiles." />
 
       {/* HERO */}
-      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
+      <section className="sunset-band section">
         <div className="container-h py-12 md:py-16">
           <div className="max-w-3xl">
             <p className="retro-badge mb-6 flex items-center gap-2">
@@ -53,25 +53,25 @@ export default function Home(){
               Neon-fast search • Glowing profiles • Real reviews. Find the perfect act or venue in seconds.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="/search" className="btn btn-ink"><FaBolt/> Find Entertainment</a>
-              <a href="/join" className="btn btn-ink">Become a Provider</a>
+              <a href="/search" className="btn btn-primary"><FaBolt/> Find Entertainment</a>
+              <a href="/join" className="btn btn-primary">Become a Provider</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* STATS */}
-      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
+      <section className="sunset-band section">
         <div className="grid sm:grid-cols-3 gap-4">
-          <div className="card p-6 text-center">
+          <div className="card p-6 text-center stat-card">
             <div className="text-4xl font-black neon-text">{events.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Events</div>
           </div>
-          <div className="card p-6 text-center">
+          <div className="card p-6 text-center stat-card">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #ff2a6d'}}>{pros.toLocaleString()}+</div>
             <div className="opacity-70 font-bold">Professionals</div>
           </div>
-          <div className="card p-6 text-center">
+          <div className="card p-6 text-center stat-card">
             <div className="text-4xl font-black" style={{textShadow:'0 0 .6rem #9b5cff'}}>{cities}</div>
             <div className="opacity-70 font-bold">Cities</div>
           </div>
@@ -79,7 +79,7 @@ export default function Home(){
       </section>
 
       {/* FEATURES */}
-      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
+      <section className="sunset-band section">
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {icon:<FaMusic/>, title:"Bands & DJs", text:"From indie to Ibiza — plug into any vibe."},
@@ -90,7 +90,7 @@ export default function Home(){
             {icon:<FaStar/>, title:"Verified Reviews", text:"Real ratings from real events."},
           ].map((f,i)=>(
             <div key={i} className="card p-6 spotlight">
-              <div className="w-14 h-14 rounded-xl mx-0 mb-4 flex items-center justify-center text-2xl"
+              <div className="feat-ico"
                    style={{background:"linear-gradient(135deg, #00fff9 0%, #9b5cff 100%)"}}>
                 {f.icon}
               </div>
@@ -102,7 +102,7 @@ export default function Home(){
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
+      <section className="sunset-band section">
         <div className="card p-8">
           <div className="grid md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-1">
@@ -137,19 +137,20 @@ export default function Home(){
       </section>
 
       {/* CTA */}
-      <section className="sunset-band border-b-[3px] border-[var(--pp-line)]">
+      <section className="sunset-band section">
         <div className="card p-10 text-center relative overflow-hidden spotlight">
           <div className="absolute inset-0" style={{background:"linear-gradient(135deg, rgba(0,255,249,.12), rgba(155,92,255,.12))"}} />
           <div className="relative z-10">
             <h2 className="font-display text-4xl md:text-5xl font-black mb-4 neon-text">Become a Premium Provider</h2>
             <p className="text-lg opacity-85 max-w-2xl mx-auto mb-8">Top placement. Verified badge. Advanced analytics. No commission — ever.</p>
-            <a href="/pricing" className="btn btn-ink"><FaBolt/> Power Up</a>
+            <a href="/pricing" className="btn btn-primary"><FaBolt/> Power Up</a>
           </div>
         </div>
       </section>
     </main>
   );
 }
+
 
 
 
