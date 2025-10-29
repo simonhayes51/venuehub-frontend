@@ -1,12 +1,12 @@
 ﻿import './theme/neon.css';
 import './boot/submitRoute.js';
 import './boot/fetchPatch.js';
-import HeroNeon from './components/HeroNeon';
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { ShortlistProvider } from "./context/ShortlistContext.jsx";
 import { CompareProvider } from "./context/CompareContext.jsx";
+import { NotificationProvider } from "./context/NotificationContext.jsx";
 import ShortlistDrawer from "./components/ShortlistDrawer.jsx";
 import CompareModal from "./components/CompareModal.jsx";
 import Navbar from "./components/Navbar.jsx";
@@ -35,7 +35,7 @@ function Shell(){
         <Route path="/venues/:id" element={<VenueDetail/>}/>
         <Route path="/join" element={<Join/>}/>
         <Route path="/pricing" element={<Pricing/>}/>
-              <Route path="/search" element={<Search/>}/>
+        <Route path="/search" element={<Search/>}/>
         <Route path="/onboard" element={<Onboard/>}/>
         <Route path="/admin/leads" element={<Leads/>}/>
         <Route path="/admin" element={<Admin/>}/>
@@ -49,17 +49,12 @@ function Shell(){
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <ShortlistProvider>
-      <CompareProvider>
-        <Shell/>
-      </CompareProvider>
-    </ShortlistProvider>
+    <NotificationProvider>
+      <ShortlistProvider>
+        <CompareProvider>
+          <Shell/>
+        </CompareProvider>
+      </ShortlistProvider>
+    </NotificationProvider>
   </BrowserRouter>
 );
-
-
-
-
-
-
-
