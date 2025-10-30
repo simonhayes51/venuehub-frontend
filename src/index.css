@@ -1,132 +1,180 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rubik:wght@400;600;900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
 :root {
-  --vh-primary: #00e5ff;
-  --vh-accent: #ff2a6d;
-  --vh-bg1: #fff8f0;
-  --vh-bg2: #ffe6f7;
-  --vh-bg3: #e4f6ff;
-  --vh-text: #121212;
+  --gradient-1: linear-gradient(135deg, #ffb6b9, #f5d6ba, #bbded6, #8ac6d1);
+  --gradient-2: linear-gradient(90deg, #ffd6ff, #c8e7ff, #a0ffe6, #fff3b0);
+  --color-dark: #222;
+  --color-light: #fff;
+  --color-accent: #00d4ff;
 }
 
-html, body {
+body {
   margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, var(--vh-bg1), var(--vh-bg2), var(--vh-bg3));
-  font-family: 'Rubik', sans-serif;
-  color: var(--vh-text);
-  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: var(--gradient-2);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+  color: var(--color-dark);
 }
 
-/* NAVBAR */
-nav {
+/* HEADER */
+.vh-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(12px) saturate(180%);
-  background: rgba(255,255,255,0.4);
-  border-bottom: 2px solid rgba(255,255,255,0.5);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  z-index: 100;
 }
-nav a {
-  color: #111;
+.vh-logo {
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+.vh-logo span { color: #00c6ff; }
+.vh-header nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
   font-weight: 600;
-  margin: 0 12px;
-  transition: color .3s;
+  color: #333;
+  transition: 0.3s;
 }
-nav a:hover {
-  color: var(--vh-accent);
+.vh-header nav a:hover {
+  color: #00c6ff;
+  transform: translateY(-2px);
 }
 
 /* HERO */
-.hero {
+.vh-hero {
   text-align: center;
-  padding: 8rem 2rem 5rem;
-  background: radial-gradient(circle at top left, #fff4d8, #ffd4ee, #e1ffff);
-  animation: hueShift 15s linear infinite;
+  padding: 6rem 2rem 4rem;
+  background: var(--gradient-1);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
 }
-.hero h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 5rem;
-  background: linear-gradient(90deg, var(--vh-accent), var(--vh-primary));
+.vh-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  background: linear-gradient(90deg,#00c6ff,#ff4ecd);
   -webkit-background-clip: text;
   color: transparent;
-  margin-bottom: 1rem;
 }
-.hero p {
-  font-size: 1.25rem;
-  opacity: 0.8;
+.vh-hero .subtitle {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
 }
-
-/* BUTTONS */
-.btn {
-  padding: 0.9rem 1.8rem;
-  border-radius: 10px;
+.badge {
+  display: inline-block;
+  background: white;
+  color: #333;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.cta-buttons .btn {
   border: none;
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(90deg, var(--vh-accent), var(--vh-primary));
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s;
 }
-.btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+.btn.primary {
+  background: linear-gradient(90deg,#00e6ff,#00ffa1);
+  color: #000;
+}
+.btn.primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0,255,200,0.4);
+}
+.btn.secondary {
+  background: white;
+  color: #333;
+}
+.btn.secondary:hover {
+  background: #f7f7f7;
+  transform: scale(1.05);
 }
 
 /* STATS */
-.stats {
+.vh-stats {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 2rem;
-  padding: 4rem 2rem;
+  flex-wrap: wrap;
+  margin: 4rem 0;
 }
 .stat-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 2rem 3rem;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.05);
   text-align: center;
-  transition: transform 0.3s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s;
 }
 .stat-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 .stat-card h2 {
-  font-size: 2.5rem;
-  color: var(--vh-accent);
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #ff4ecd;
 }
 
 /* FEATURES */
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  padding: 5rem 2rem;
-}
-.feature {
-  background: linear-gradient(135deg, #ffffffcc, #fff3fa);
-  border-radius: 20px;
-  padding: 2rem;
+.vh-features {
   text-align: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-  transition: all .3s ease;
+  padding: 3rem 2rem;
 }
-.feature:hover {
-  transform: translateY(-5px) rotate(-0.5deg);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+.vh-features h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
-.feature h3 {
-  color: var(--vh-primary);
-  font-weight: 800;
-  margin-bottom: .75rem;
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.feature-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  background: linear-gradient(135deg,#fff,#e6faff,#fff0f6);
+}
+.feature-card span {
+  font-size: 2rem;
+}
+.feature-card h3 {
+  color: #00c6ff;
+  margin: 0.8rem 0 0.4rem;
 }
 
-/* ANIMATIONS */
-@keyframes hueShift {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+/* FOOTER */
+.vh-footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+  margin-top: 4rem;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
