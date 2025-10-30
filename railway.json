@@ -1,7 +1,7 @@
 {
   "services": [
     {
-      "name": "venuehub-frontend",
+      "name": "bookedup-frontend",
       "rootDirectory": ".",
       "env": {
         "NODE_ENV": "production",
@@ -9,9 +9,15 @@
       },
       "nixpacksPlan": {
         "phases": {
-          "install": { "cmds": ["npm ci --omit=dev"] },
-          "build":   { "cmds": ["npm run build"] },
-          "start":   { "cmds": ["npm start"] }
+          "install": {
+            "cmds": ["npm ci --omit=dev", "npm install express serve-static"]
+          },
+          "build": {
+            "cmds": ["npm run build"]
+          },
+          "start": {
+            "cmds": ["node server.js"]
+          }
         }
       }
     }
