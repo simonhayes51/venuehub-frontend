@@ -1,21 +1,13 @@
 ﻿import express from "express";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const distDir = path.join(__dirname, "dist");
-
 const app = express();
+const dist = path.join(__dirname, "dist");
 
-app.use(express.static(distDir, {
-  index: "index.html",
-  setHeaders(res, filePath) {
-    if (filePath.endsWith(".html")) res.setHeader("Cache-Control", "no-cache");
-    else res.setHeader("Cache-Control", "public, max-age=604800, immutable");
-  }
-}));
+app.use(express.static(dist, { maxAge: "1y", index: false }));
+app.get("*", (_req, res) => res.sendFile(path.join(dist, "index.html")));
 
-app.get("*", (_req, res) => res.sendFile(path.join(distDir, "index.html")));
-
-const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`✅ Serving dist on :${port}`));
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`✅ BookedUp serving /dist on :${PORT}`));
