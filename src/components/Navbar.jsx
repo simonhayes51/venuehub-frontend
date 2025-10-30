@@ -5,7 +5,9 @@ export default function Navbar(){
   return (
     <nav className='nav'>
       <div className='brand'>
-        <span style={{fontWeight:900}}>VENUE</span><b>HUB</b>
+        <Link to='/' style={{textDecoration:'none', color:'inherit', display:'flex', alignItems:'center', gap:8}}>
+          <span style={{fontWeight:900}}>VENUE</span><b>HUB</b>
+        </Link>
       </div>
       <ul>
         <li><Link to='/acts'>Acts</Link></li>
