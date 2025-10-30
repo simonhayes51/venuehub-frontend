@@ -1,11 +1,14 @@
-﻿export default function Card({image, title, subtitle, meta}){
+﻿import React from 'react';
+import RatingStars from './RatingStars';
+
+export default function Card({title,city,price,capacity,img,rating=5,tag=''}){
   return (
-    <article className="card overflow-hidden">
-      {image ? <img src={image} alt="" className="h-44 w-full object-cover" /> : <div className="h-44 bg-white/5" />}
-      <div className="p-4 space-y-1">
-        <h3 className="font-semibold">{title}</h3>
-        {subtitle && <p className="text-sm text-white/70">{subtitle}</p>}
-        {meta && <p className="text-xs text-white/50">{meta}</p>}
+    <article className='card'>
+      <img src={img || 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800'} alt=''/>
+      <div>
+        <h3>{title}</h3>
+        <div className='meta'><span className='tag'>{city}</span><span className='tag'>Cap {capacity}</span><span className='tag'>From £{price}</span>{tag && <span className='tag'>{tag}</span>}</div>
+        <div style={{marginTop:6}}><RatingStars value={rating}/></div>
       </div>
     </article>
   );
