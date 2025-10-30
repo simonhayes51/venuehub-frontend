@@ -1,11 +1,14 @@
-﻿import React, { useMemo, useState } from 'react';
-import Card from '../components/Card';
-import { getVenues } from '../data/store';
+﻿import React, { useMemo, useState } from "react";
+import Card from "../components/Card";
+import { getVenues } from "../data/store";
 
 export default function Venues(){
   const venues = useMemo(()=>getVenues(),[]);
   const [q,setQ] = useState('');
-  const filtered = venues.filter(x => ${x.title} .toLowerCase().includes(q.toLowerCase()));
+  const filtered = venues.filter(x =>
+    `${x.title} ${x.city ?? ''}`.toLowerCase().includes(q.toLowerCase())
+  );
+
   return (
     <div className='wrapper'>
       <h2 className='section-title'>Featured Venues</h2>
