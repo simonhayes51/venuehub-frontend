@@ -1,8 +1,61 @@
 {
-  "build": {
-    "builder": "NIXPACKS"
-  },
-  "deploy": {
-    "startCommand": "npm run preview -- --port 8080 --host"
-  }
+  "services": [
+    {
+      "name": "venuehub-backend",
+      "rootDirectory": ".",
+      "env": {
+        "APP_ENV": "prod",
+        "ALLOWED_ORIGINS": "*",
+        "FRONTEND_BUILD_DIR": "web/dist",
+        "PORT": "8080"
+      },
+      "nixpacksPlan": {
+        "phases": {
+          "setup": {},
+          "install": {
+            "cmds": [
+              "pip install --upgrade pip",
+              "pip install -r backend/requirements.txt"
+            ]
+          },
+          "build": {
+            "cmds": [
+              "cd web && npm install && npm run build && cd .."
+            ]
+          },
+          "start": {
+            "cmds": [
+              "python -m uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT}"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "venuehub-frontend",
+      "rootDirectory": "web",
+      "env": {
+        "PORT": "8080"
+      },
+      "nixpacksPlan": {
+        "phases": {
+          "install": {
+            "cmds": [
+              "npm install"
+            ]
+          },
+          "build": {
+            "cmds": [
+              "npm run build"
+            ]
+          },
+          "start": {
+            "cmds": [
+              "npm start"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }
