@@ -56,10 +56,10 @@ export function searchAll(q){
   if(!needle) return { acts: getActs(), venues: getVenues() };
 
   const acts = getActs().filter(x =>
-    \\ \ \\.toLowerCase().includes(needle)
+    `${x.title} ${x.type ?? ''} ${x.city ?? ''}`.toLowerCase().includes(needle)
   );
   const venues = getVenues().filter(x =>
-    \\ \\.toLowerCase().includes(needle)
+    `${x.title} ${x.city ?? ''}`.toLowerCase().includes(needle)
   );
   return { acts, venues };
 }
