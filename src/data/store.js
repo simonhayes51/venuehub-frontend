@@ -53,3 +53,9 @@ export function searchAll(q){
   const venues = getVenues().filter(x => `${x.title} ${x.city}`.toLowerCase().includes(needle));
   return { acts, venues };
 }
+
+export function getAct(id){ return getActs().find(a=>a.id===id); }
+export function getVenue(id){ return getVenues().find(v=>v.id===id); }
+export function deleteAct(id){ actsCache = actsCache.filter(a=>a.id!==id); localStorage.setItem("bookedup_acts", JSON.stringify(actsCache)); }
+export function deleteVenue(id){ venuesCache = venuesCache.filter(v=>v.id!==id); localStorage.setItem("bookedup_venues", JSON.stringify(venuesCache)); }
+

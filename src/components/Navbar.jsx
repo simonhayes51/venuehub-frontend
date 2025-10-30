@@ -1,6 +1,14 @@
-﻿import { Link, NavLink } from "react-router-dom";
+﻿import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getShortlist } from "../data/store";
+import ShortlistDrawer from "./ShortlistDrawer";
 
 export default function Navbar(){
+  const [open,setOpen]=useState(false);
+  const [count,setCount]=useState(getShortlist().length);
+  const loc = useLocation();
+  useEffect(()=>{ setCount(getShortlist().length); },[loc,open]);
+
   return (
     <header className="navbar">
       <div className="wrapper navbar-inner">
@@ -13,9 +21,11 @@ export default function Navbar(){
           <NavLink to="/venues">Venues</NavLink>
           <NavLink to="/pricing">Pricing</NavLink>
           <NavLink to="/search">Search</NavLink>
+          <a className="nav-cta" onClick={()=>setOpen(true)}>Shortlist ({count})</a>
           <NavLink className="nav-cta" to="/admin">+ Add Services</NavLink>
         </nav>
       </div>
+      <ShortlistDrawer open={open} onClose={()=>setOpen(false)}/>
     </header>
   );
 }
