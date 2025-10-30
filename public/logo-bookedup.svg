@@ -1,0 +1,7 @@
+﻿<svg width="744" height="472" viewBox="0 0 744 472" xmlns="http://www.w3.org/2000/svg">
+  <rect rx="24" width="744" height="472" fill="#FF69B4"/>
+  <rect x="32" y="32" width="680" height="220" rx="16" fill="white" stroke="black" stroke-width="8"/>
+  <rect x="72" y="268" width="600" height="120" rx="16" fill="#222" stroke="black" stroke-width="8"/>
+  <text x="372" y="350" text-anchor="middle" font-size="72" font-weight="900"
+        font-family="Arial, Helvetica, sans-serif" fill="#FFE600">BOOKED<tspan fill="#8A5CF6">UP</tspan></text>
+</svg>

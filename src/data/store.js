@@ -1,71 +1,55 @@
-﻿const LS_ACTS = 'vh_acts_v1';
-const LS_VENUES = 'vh_venues_v1';
-const LS_SHORT = 'vh_shortlist_v1';
+﻿/**
+ * BookedUp "DB" – demo/local only
+ * Acts & Venues kept in localStorage (fallback to seed).
+ */
+
+const LS_ACTS = "bookedup_acts";
+const LS_VENUES = "bookedup_venues";
+const LS_SHORTLIST = "bookedup_shortlist";
 
 const seedActs = [
-  { id:'a1', title:'Neon Nights Band', type:'Band', city:'Manchester', price:850, rating:4.9, capacity:6, img:'', about:'High-energy party band covering 80s–now.' },
-  { id:'a2', title:'DJ Vortex',        type:'DJ',   city:'Newcastle',  price:450, rating:4.6, capacity:1, img:'', about:'Club-ready DJ with seamless mixes & MC skills.' },
-  { id:'a3', title:'Soul Sisters',     type:'Band', city:'Leeds',       price:780, rating:4.8, capacity:4, img:'', about:'Soul, Motown & pop — big harmonies, big vibes.' },
+  { id:"a1", title:"Neon Nights Band", city:"Newcastle", rating:4.8, priceFrom:600, tags:["band","party"] },
+  { id:"a2", title:"DJ Vortex",       city:"Leeds",      rating:4.7, priceFrom:350, tags:["dj","club"] },
+  { id:"a3", title:"Magic Max",       city:"Sunderland", rating:4.6, priceFrom:250, tags:["magic","host"] },
 ];
 
 const seedVenues = [
-  { id:'v1', title:'City Lights Loft',  city:'Leeds',      capacity:80,  price:600,  rating:5,   img:'' },
-  { id:'v2', title:'Coastal View Barn', city:'Sunderland', capacity:120, price:900,  rating:4.7, img:'' },
-  { id:'v3', title:'The Grand Hall',    city:'Newcastle',  capacity:300, price:1500, rating:4.9, img:'' },
+  { id:"v1", title:"City Lights Loft",  city:"Leeds",      capacity:80,  priceFrom:600 },
+  { id:"v2", title:"Coastal View Barn", city:"Sunderland", capacity:120, priceFrom:900 },
+  { id:"v3", title:"The Grand Hall",    city:"Newcastle",  capacity:300, priceFrom:1500 },
 ];
 
-function read(key, fallback){
-  try { const v = JSON.parse(localStorage.getItem(key)); return (Array.isArray(v) || typeof v === 'object') ? v : fallback; }
-  catch { return fallback; }
-}
-function write(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
+function readLS(key, fallback){ try{ const v = JSON.parse(localStorage.getItem(key)); return Array.isArray(v)?v:fallback; } catch{ return fallback; } }
+function writeLS(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
 
-export function initStore(){
-  if(!localStorage.getItem(LS_ACTS))   write(LS_ACTS, seedActs);
-  if(!localStorage.getItem(LS_VENUES)) write(LS_VENUES, seedVenues);
-  if(!localStorage.getItem(LS_SHORT))  write(LS_SHORT, []);
-}
+let actsCache   = readLS(LS_ACTS, seedActs);
+let venuesCache = readLS(LS_VENUES, seedVenues);
+let shortlist   = new Set(readLS(LS_SHORTLIST, []));
 
-export function getActs(){ return read(LS_ACTS, []); }
-export function getAct(id){ return getActs().find(a => a.id === id); }
+export function getActs(){ return actsCache.slice().sort((a,b)=>a.title.localeCompare(b.title)); }
+export function getVenues(){ return venuesCache.slice().sort((a,b)=>a.title.localeCompare(b.title)); }
+
 export function addAct(act){
-  const acts = getActs();
-  acts.push({ id: cryptoRandomId(), rating:5, img:'', ...act });
-  write(LS_ACTS, acts);
-  return acts;
+  const a = { id: crypto.randomUUID(), title: act.title?.trim()||"Untitled Act", city: act.city?.trim()||"", rating: +act.rating||4.5, priceFrom:+act.priceFrom||0, tags: act.tags||[] };
+  actsCache = [a, ...actsCache]; writeLS(LS_ACTS, actsCache); return a;
+}
+export function addVenue(v){
+  const x = { id: crypto.randomUUID(), title: v.title?.trim()||"Untitled Venue", city: v.city?.trim()||"", capacity:+v.capacity||0, priceFrom:+v.priceFrom||0 };
+  venuesCache = [x, ...venuesCache]; writeLS(LS_VENUES, venuesCache); return x;
 }
 
-export function getVenues(){ return read(LS_VENUES, []); }
-
-export function shortlist(){ return read(LS_SHORT, []); }
-export function addShort(item){
-  const s = shortlist();
-  if(!s.find(x => x.kind === item.kind && x.id === item.id)){
-    s.push(item); write(LS_SHORT, s);
-  }
-  return s;
+/* shortlist */
+export function toggleShort(id){
+  shortlist.has(id) ? shortlist.delete(id) : shortlist.add(id);
+  writeLS(LS_SHORTLIST, Array.from(shortlist)); return Array.from(shortlist);
 }
-export function removeShort(kind,id){
-  const s = shortlist().filter(x => !(x.kind === kind && x.id === id));
-  write(LS_SHORT, s); return s;
-}
-export function clearShort(){ write(LS_SHORT, []); return []; }
+export function getShortlist(){ return Array.from(shortlist); }
 
+/* search both domains */
 export function searchAll(q){
-  const needle = (q || '').trim().toLowerCase();
-  if(!needle) return { acts: getActs(), venues: getVenues() };
-
-  const acts = getActs().filter(x =>
-    `${x.title} ${x.type ?? ''} ${x.city ?? ''}`.toLowerCase().includes(needle)
-  );
-  const venues = getVenues().filter(x =>
-    `${x.title} ${x.city ?? ''}`.toLowerCase().includes(needle)
-  );
+  const needle = (q||"").trim().toLowerCase();
+  if(!needle) return { acts:getActs(), venues:getVenues() };
+  const acts   = getActs().filter(x => `${x.title} ${x.city} ${(x.tags||[]).join(" ")}`.toLowerCase().includes(needle));
+  const venues = getVenues().filter(x => `${x.title} ${x.city}`.toLowerCase().includes(needle));
   return { acts, venues };
-}
-
-// tiny id
-function cryptoRandomId(){
-  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) return crypto.randomUUID().slice(0,8);
-  return Math.random().toString(36).slice(2,10);
 }

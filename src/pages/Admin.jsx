@@ -1,31 +1,42 @@
-﻿import React, { useState } from 'react';
-import { addAct } from '../data/store';
+﻿import { useState } from "react";
+import { addAct, addVenue } from "../data/store";
 
 export default function Admin(){
-  const [form,setForm]=useState({ title:'', type:'Band', city:'', price:500, capacity:4, about:'' });
-  const onChange = e => setForm(f=>({ ...f, [e.target.name]: e.target.value }));
-  const onSubmit = e => {
-    e.preventDefault();
-    addAct({ ...form, price:Number(form.price), capacity:Number(form.capacity) });
-    alert('Act added!');
-    setForm({ title:'', type:'Band', city:'', price:500, capacity:4, about:'' });
-  };
+  const [act, setAct] = useState({title:"", city:"", priceFrom:"", rating:""});
+  const [venue, setVenue] = useState({title:"", city:"", capacity:"", priceFrom:""});
+  const [saved, setSaved] = useState("");
 
   return (
-    <div className='wrapper'>
-      <h2 className='section-title'>Admin — Add New Act</h2>
-      <form className='tile' onSubmit={onSubmit} style={{display:'grid',gap:12,maxWidth:560}}>
-        <input className='input' name='title' placeholder='Act name' value={form.title} onChange={onChange} required />
-        <select className='select' name='type' value={form.type} onChange={onChange}>
-          <option>Band</option><option>DJ</option><option>Singer</option><option>Host</option>
-        </select>
-        <input className='input' name='city' placeholder='City' value={form.city} onChange={onChange} required />
-        <input className='input' type='number' name='price' placeholder='Price from (£)' value={form.price} onChange={onChange} min='0' />
-        <input className='input' type='number' name='capacity' placeholder='Members / size' value={form.capacity} onChange={onChange} min='1' />
-        <textarea className='input' name='about' placeholder='About / description' value={form.about} onChange={onChange} rows='4'></textarea>
-        <button className='btn btn-primary' type='submit'>Add Act</button>
-      </form>
-      <p className='tile' style={{marginTop:12}}>Tip: Added acts appear in <b>Acts</b>, are searchable, and can be opened on the details page.</p>
+    <div className="wrapper section">
+      <h2>Admin</h2>
+      <div className="row">
+        <div className="admin-card" style={{flex:"1 1 340px"}}>
+          <h3>Add Act</h3>
+          <div className="row">
+            <input className="input" placeholder="Title" value={act.title} onChange={e=>setAct({...act,title:e.target.value})}/>
+            <input className="input" placeholder="City" value={act.city} onChange={e=>setAct({...act,city:e.target.value})}/>
+          </div>
+          <div className="row">
+            <input className="input" placeholder="Price From" value={act.priceFrom} onChange={e=>setAct({...act,priceFrom:e.target.value})}/>
+            <input className="input" placeholder="Rating" value={act.rating} onChange={e=>setAct({...act,rating:e.target.value})}/>
+          </div>
+          <button className="tape-btn primary" onClick={()=>{ addAct(act); setSaved("Act saved!");}}><span className="dot" />Save Act</button>
+        </div>
+
+        <div className="admin-card" style={{flex:"1 1 340px"}}>
+          <h3>Add Venue</h3>
+          <div className="row">
+            <input className="input" placeholder="Title" value={venue.title} onChange={e=>setVenue({...venue,title:e.target.value})}/>
+            <input className="input" placeholder="City" value={venue.city} onChange={e=>setVenue({...venue,city:e.target.value})}/>
+          </div>
+          <div className="row">
+            <input className="input" placeholder="Capacity" value={venue.capacity} onChange={e=>setVenue({...venue,capacity:e.target.value})}/>
+            <input className="input" placeholder="Price From" value={venue.priceFrom} onChange={e=>setVenue({...venue,priceFrom:e.target.value})}/>
+          </div>
+          <button className="tape-btn" onClick={()=>{ addVenue(venue); setSaved("Venue saved!");}}><span className="dot" />Save Venue</button>
+        </div>
+      </div>
+      {saved && <p style={{marginTop:12, color:"#2a9d8f", fontWeight:700}}>{saved}</p>}
     </div>
-  );
+  )
 }
