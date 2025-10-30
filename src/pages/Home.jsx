@@ -1,34 +1,43 @@
-﻿import { Link } from "react-router-dom";
-
-export default function Home(){
+﻿export default function Home(){
   return (
     <>
       <section className="hero">
         <div className="wrapper">
-          <div className="badge">⚡ 10,000+ Events Booked</div>
-          <h1>BOOK THE FUTURE NOW</h1>
-          <p>Find, book, and shine — trusted acts, glowing venues, and real reviews.</p>
-          <div className="btn-row">
-            <Link to="/search" className="tape-btn primary"><span className="dot" />Find Entertainment</Link>
-            <Link to="/admin" className="tape-btn secondary"><span className="dot" />Become a Provider</Link>
+          <div className="card" style={{display:'inline-flex', alignItems:'center', gap:8}}>
+            <span style={{fontSize:18}}>⚡</span> 10,000+ Events Booked
           </div>
 
-          <div className="stats">
-            <div className="stat"><div className="value">10,000+</div><div className="label">Events</div></div>
-            <div className="stat"><div className="value">2,500+</div><div className="label">Professionals</div></div>
-            <div className="stat"><div className="value">180</div><div className="label">Cities</div></div>
-          </div>
+          <h1 className="h1-gradient" style={{fontSize: 'clamp(36px, 6vw, 68px)', margin: '24px 0 12px'}}>
+            BOOK THE FUTURE NOW
+          </h1>
 
-          <h3 className="section-title">WHAT YOU CAN BOOK</h3>
-          <div className="card-grid">
-            <div className="retro-card"><h3>🎵 Bands & DJs</h3><p>From indie to Ibiza — plug into any vibe.</p></div>
-            <div className="retro-card"><h3>🎤 Hosts & MCs</h3><p>Keep crowds buzzing with pro showrunners.</p></div>
-            <div className="retro-card"><h3>💍 Weddings & Parties</h3><p>Make it magical — stress-free bookings.</p></div>
-            <div className="retro-card"><h3>🏢 Venues</h3><p>From rooftops to halls — discover your perfect match.</p></div>
+          <p style={{maxWidth: 780, lineHeight:1.6, fontWeight:600, color:'var(--ink-2)'}}>
+            Find, book, and shine — trusted acts, glowing venues, and real reviews.
+          </p>
+
+          <div style={{display:'flex', gap:12, marginTop:20, flexWrap:'wrap'}}>
+            <button className="btn btn-primary">✨ Find Entertainment</button>
+            <button className="btn btn-secondary">🔆 Become a Provider</button>
           </div>
         </div>
       </section>
-      <footer className="footer">© 2025 BookedUp — built for entertainers & venues.</footer>
+
+      <section className="wrapper mt-32">
+        <div className="grid-3">
+          <div className="card">
+            <div className="stat">10,000+</div>
+            <div>Events</div>
+          </div>
+          <div className="card">
+            <div className="stat">2,500+</div>
+            <div>Professionals</div>
+          </div>
+          <div className="card">
+            <div className="stat">180</div>
+            <div>Cities</div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
