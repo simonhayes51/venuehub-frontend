@@ -2,19 +2,19 @@
 
 export default function Navbar(){
   return (
-    <header className="navbar">
-      <div className="inner">
-        <Link to="/" style={{display:"inline-flex",alignItems:"center",gap:10,fontWeight:900}}>
-          <img src="/logo-bookedup.svg" alt="BookedUp" height="26"/>
+    <nav className="appbar">
+      <div className="container nav-inner">
+        <Link to="/" className="brand">
+          <img src="/logo-bookedup.svg" alt="BookedUp" />
+          <b>BOOKEDUP</b>
         </Link>
-        <nav style={{marginLeft:"auto",display:"flex",gap:18}}>
-          {["acts","venues","pricing","search","admin"].map(p=>(
-            <NavLink key={p} to={`/${p}`} style={({isActive})=>({color:isActive?"var(--brand1)":"var(--ink-2)"})}>
-              {p[0].toUpperCase()+p.slice(1)}
-            </NavLink>
-          ))}
-        </nav>
+        <NavLink to="/acts">Acts</NavLink>
+        <NavLink to="/venues">Venues</NavLink>
+        <NavLink to="/pricing">Pricing</NavLink>
+        <NavLink to="/search">Search</NavLink>
+        <NavLink to="/admin">Admin</NavLink>
+        <Link id="shortlist-toggle" to="/shortlist" style={{marginLeft:"auto"}}>Shortlist</Link>
       </div>
-    </header>
+    </nav>
   );
 }
