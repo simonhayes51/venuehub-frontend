@@ -1,12 +1,15 @@
-﻿export default function Modal({open,onClose,children}){
+﻿import { useEffect } from "react";
+export default function Modal({open,onClose,children}){
+  useEffect(()=>{ if(open) document.body.classList.add("modal-open"); else document.body.classList.remove("modal-open"); return ()=>document.body.classList.remove("modal-open")},[open]);
   if(!open) return null;
-  return (
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.35)",backdropFilter:"blur(2px)",zIndex:60}}
-         onClick={onClose}>
-      <div onClick={e=>e.stopPropagation()}
-           style={{maxWidth:720,margin:"6vh auto",background:"#fff",borderRadius:16,boxShadow:"0 18px 42px rgba(0,0,0,.22)",padding:22}}>
-        {children}
+  return <>
+    <div className="modal-backdrop" onClick={onClose}/>
+    <div className="modal">
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+        <strong>Details</strong>
+        <button className="btn btn-secondary" onClick={onClose}>Close</button>
       </div>
+      {children}
     </div>
-  );
+  </>;
 }
